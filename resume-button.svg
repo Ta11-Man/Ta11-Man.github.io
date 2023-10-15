@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="209.15198mm"
+   height="48.956776mm"
+   viewBox="0 0 209.15198 48.956776"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="resume-button.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   inkscape:export-filename="resume-button.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.466344"
+     inkscape:cx="732.43387"
+     inkscape:cy="217.20688"
+     inkscape:window-width="1350"
+     inkscape:window-height="1026"
+     inkscape:window-x="483"
+     inkscape:window-y="20"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <rect
+       x="142.53136"
+       y="308.93161"
+       width="273.7952"
+       height="47.469608"
+       id="rect3074" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.26190264,-0.7492225)">
+    <rect
+       style="fill:#5f201b;fill-opacity:1;stroke:#e6b39a;stroke-width:0.440785;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1514"
+       width="208.7112"
+       height="48.515827"
+       x="0.48229513"
+       y="0.96961498"
+       ry="17.099842"
+       rx="19.415686" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.64698095,0,0,0.64698095,-84.671952,-187.3329)"
+       id="text3072"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;font-family:High-standard2;-inkscape-font-specification:High-standard2;white-space:pre;shape-inside:url(#rect3074);shape-padding:1.57084;display:inline;fill:#e6b39a;fill-opacity:1"><tspan
+         x="144.10156"
+         y="340.10195"
+         id="tspan17028">Download resume</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#e6b39a;stroke-width:2.12678;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4740"
+       width="24.854424"
+       height="31.813654"
+       x="170.42058"
+       y="9.3207073"
+       rx="3.3100266"
+       ry="2.7837009" />
+    <path
+       style="fill:#aa1111;fill-opacity:0.666667;stroke:#e6b39a;stroke-width:2.20393;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 174.3476,15.633735 h 11.33363"
+       id="path4899" />
+    <path
+       style="fill:#aa1111;fill-opacity:0.666667;stroke:#e6b39a;stroke-width:2.20393;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 174.39729,19.958394 h 16.60277"
+       id="path4901"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#aa1111;fill-opacity:0.666667;stroke:#e6b39a;stroke-width:2.20393;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 174.39729,24.283071 h 16.60277"
+       id="path4999"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#aa1111;fill-opacity:0.666667;stroke:#e6b39a;stroke-width:2.20393;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 174.39729,27.911807 h 10.28977"
+       id="path5001"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#aa1111;fill-opacity:0.666667;stroke:#e6b39a;stroke-width:2.20393;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 174.39729,33.379786 h 16.90104"
+       id="path5003"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#aa1111;fill-opacity:0.666667;stroke:#e6b39a;stroke-width:2.20393;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 174.39729,36.710286 h 9.04705"
+       id="path5005"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>
