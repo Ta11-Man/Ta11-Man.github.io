@@ -9,54 +9,133 @@
 
     <style>
 
-    	    .topnav {
-  background-color: #333;
-  overflow: hidden;
+.sidenav {
+  height: 100%;
+  width: 0;
   position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #5F201B;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
 }
 
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
+.sidenav a {
+  padding: 8px 8px 8px 20px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 25px;
+  color: #f2f2f2;
+  display: block;
+  transition: 0.3s;
 }
 
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
+.sidenav a:hover {
+  color: #000000;
+  background-color: #00325D;
 }
 
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #04AA6D;
-  color: white;
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
 }
 
-	{color: #00325D;background-color: #985E29}
+.container {
+  position: relative;
+  text-align: center;
+  color: FF6E00;
+}
+
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+/* Top left text */
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+/* Top right text */
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sidenav .closebtn:hover {
+  
+  background-color: #5F201B;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
     </style>
 
   </head>
 
   <body style= ';background-color: #032D00'>
 
-  	 <div class="topnav">
-  <a class="active" href="index.html">Home</a>
-  <a href="projects.html">Projects</a>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#" style="background-color: 00325D;">Home </a>
+  <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
-  <a href="#about">About</a>
-</div> 
+  <a href="projects.html">Projects</a>
+</div>
 
 
-   	<p style='font-size:125px;line-height: 1;text-align:center;color:000000'>Gab<br></p> 
 
-	<p style='font-size:35px; line-height: 2;color: E6B39A; margin:150px;'> Hi, </p>
+<div class="container">
+  <img style='align-content: center; margin: -15;' src='leaf-background5.gif' alt='vines' width=105% height=auto> <!-- the animation-->
+    <div class="top-left">
+      <span style="font-size:30px; cursor:pointer color: FF6E00;" onclick="openNav()">&#9776;</span> <!-- the nav button -->
+    </div>
+    <div class="centered"><p style='font-size:125px;line-height: 1;text-align:center; margin: -50; color:FF6E00'>Gabriel Halstead<br></p> </div>
+    
+</div>
 
 
+
+  <p style='font-size:20px; line-height: 2;color: E6B39A; margin:50px;  padding: 150px 120px;'> Hi, my name is Gabe!  I work at Chick-fil-A as a trainer in customer service and operations.  My managers trust me completely and love to have me around, but I’m currently majoring in Computer Science at Purdue University and really looking forward to getting some technical experience in my field of study.  I would be happy to hear about opportunities to work with you!</p>
+
+
+
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "200px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
    </body>
 
  </html>

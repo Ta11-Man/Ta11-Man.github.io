@@ -10,8 +10,55 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
     <style>
+    .sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #5F201B;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
 
-          .topnav {
+.sidenav a {
+  padding: 8px 8px 8px 20px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #f2f2f2;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #000000;
+  background-color: #00325D;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+
+.sidenav .closebtn:hover {
+  
+  background-color: #5F201B;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+<!--
+    <style>
+
+  .topnav {
   background-color: #5F201B;
   overflow: hidden;
   position: fixed;
@@ -48,7 +95,7 @@
   </head>
 
   <body style= ';background-color: #032D00'>
-
+<!--
   	 <div class="topnav">
   <a href="index.html">Home</a>
   <a href="projects.html">Projects</a>
@@ -56,11 +103,35 @@
   <a href="about.html">About</a>
 </div> 
 <p>-</p>
+-->
 
-   	<p style='font-size:125px;line-height: 1;text-align:center;color:000000'>Contact<br></p> 
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="index.html">Home </a>
+  <a href="about.html">About</a>
+  <a href="contact.html" style="background-color: 00325D;">Contact</a>
+  <a href="projects.html">Projects</a>
+</div>
 
-	<p style='font-size:35px; line-height: 2;color: E6B39A; text-align: center;'><!---   (214)830-4075<br>-->-   gabe.halstead@hotmail.com<br>-   <a href='https://www.linkedin.com/in/gabriel-halstead'>LinkedIn</a></p>
+<p style="color: FF6E00;">
+      <span style="font-size:30px; cursor:pointer color: FF6E00;" onclick="openNav()">&#9776;</span> <!-- the nav button -->
+</p>
 
+ <p style="text-align: center; margin-top: -72; margin-bottom: -100;"><img style='align-content: center;' src='contact-text.gif' alt='About' width=50% height=auto></p>
+
+
+	<p style='font-size:35px; line-height: 3;color: E6B39A; text-align: center;'><!---   (214)830-4075<br>-->-   gabe.halstead@hotmail.com<br>-   <a href='https://www.linkedin.com/in/gabriel-halstead'>LinkedIn</a></p>
+
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "200px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
 
    </body>
 

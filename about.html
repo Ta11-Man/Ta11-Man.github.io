@@ -11,36 +11,52 @@
 
     <style>
 
-          .topnav {
-  background-color: #5F201B;
-  overflow: hidden;
+
+    .sidenav {
+  height: 100%;
+  width: 0;
   position: fixed;
-  margin: -12;
-  padding: 2px;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 18px 24px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
+  z-index: 1;
+  top: 0;
+  left: 0;
   background-color: #5F201B;
-  color: black;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
 }
 
-/* Add a color to the active/current link */
-.topnav a.active {
+.sidenav a {
+  padding: 8px 8px 8px 20px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #f2f2f2;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #000000;
   background-color: #00325D;
-  color: white;
 }
 
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+
+.sidenav .closebtn:hover {
+  
+  background-color: #5F201B;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
 
 .effect:hover img.image{
 display:none;
@@ -65,37 +81,54 @@ width: 50%;
 
   <body style= ';background-color: #032D00'>
 
-  	 <div class="topnav">
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="index.html">Home</a>
-  <a href="projects.html">Projects</a>
+  <a href="about.html"style="background-color: 00325D;">About</a>
   <a href="contact.html">Contact</a>
-  <a class="active" href="about.html">About</a>
-</div> 
-<p>-</p>
+  <a href="projects.html">Projects</a>
+</div>
+
   <!-- add a resume button here-->
 
 
 
 
-   	<p style='font-size:125px;line-height: 1;text-align:center;color:000000'>About<br></p> 
+   	<!-- <p style='font-size:125px;line-height: 1;text-align:center;color:FF6E00'>About<br></p> 
+    -->
+<p style="color: FF6E00;">
+      <span style="font-size:30px; cursor:pointer color: FF6E00;" onclick="openNav()">&#9776;</span> <!-- the nav button -->
+</p>
+
+
+    <p style="text-align: center; margin-top: -72; margin-bottom: -0;"><img style='align-content: center;' src='bout-text.gif' alt='About' width=50% height=auto></p>
 
     <div class="effect"><p style="text-align: center;"><a style='color: E6B39A; text-align: center;' href="resume.pdf"><img src='active-resume-button.svg' class="image hover" heigh='15%' width="15%"><img><img src='resume-button.svg' class="image" heigh='15%' width="15%"><img></a></p></div>
 
 
-	<p style='font-size:35px; text-indent: 65px; line-height: 2;color: E6B39A; margin:150px;'>  
+	<p style='font-size:20px; text-indent: 65px; line-height: 1.5;color: E6B39A; margin:50px; padding: 0px 100px;'>  
   In the words of my father’s vacation shirt, “Freedom is an empty road and a full tank.” “But,” I say, “adventure is a full road and an empty tank.”  The best thing a full tank of gas is good for is getting into an adventure.  Isn’t it adversity that leads to a story worth telling and remembering?  When I look back, I find it hard to pick out problems in my life because if they had gone well, they wouldn’t be as memorable. </p>
-  <p style='font-size:35px; text-indent: 65px; line-height: 2;color: E6B39A; margin:150px;'>
+  <p style='font-size:20px; text-indent: 65px; line-height: 1.5;color: E6B39A; margin:50px; padding: 0px 100px;'>
   The same philosophic part of me that loves a challenge, loves to be helpful, and all the better when helping poses a challenge.  Having been born in Texas, I grew up wearing a cowboy hat on occasion.  Years ago, I started wearing it to the grocery store.  I noticed people found me more approachable and memorable.  Since then, I’ve worn my hat most places.  It gives me the chance to be more helpful to friends and strangers alike.  My mother enjoys taking me with her on shopping trips for more than my help.  She sees how much people get along with me and likes to be in what I’ve called “the splash zone” of friendliness.  She says that everyone is a little kinder when I’m around.  I’m glad my hat does more than just keep the sun out of my eyes. </p>
-  <p style='font-size:35px; text-indent: 65px; line-height: 2;color: E6B39A; margin:150px;'>
+  <p style='font-size:20px; text-indent: 65px; line-height: 1.5;color: E6B39A; margin:50px; padding: 0px 100px;'>
   We now live in Indiana atop a hill surrounded by eleven acres of forest.  Living in the woods and homeschooling makes a great combination.  Because I’m homeschooled, I can enjoy doing my math work or reading a book outside under the trees.  We’ve also been able to do so many amazing projects where we live.  We’ve taken down many large trees, refloored our entire house, made a chicken coop and the list goes on.  Our driveway is so long and steep that I take the trash to the road on our tractor.  I think having driven the tractor for so many years set me up well for learning to drive a car. </p>
-  <p style='font-size:35px; text-indent: 65px; line-height: 2;color: E6B39A; margin:150px;'>
+  <p style='font-size:20px; text-indent: 65px; line-height: 1.5;color: E6B39A; margin:50px; padding: 0px 100px;'>
   I started working at Chick-fil-A over a year ago now. I was a little worried that they wouldn’t like me as much because they have a uniform policy, and I might appear uninteresting.  I wasn’t quite sure if I’d hold the same instant charm.  The feeling didn’t last long because everyone warmed up to me right away. Now I know how to do so many tasks around the restaurant that I’ve even explained a few things to my supervisors. </p>
-  <p style='font-size:35px; text-indent: 65px; line-height: 2;color: E6B39A; margin:150px;'>
+  <p style='font-size:20px; text-indent: 65px; line-height: 1.5;color: E6B39A; margin:50px; padding: 0px 100px;'>
 One day I was working at the end of my shift.  My manager Brady asked me to finish a task for him before I left for the day.  I went right to fulfilling his request, even though I knew it would keep me some time past the end of my shift. When I was done, I checked in with Brady who said I had done all he needed and thanked me for staying late. I replied, “I’m happy to!”  and his response warmed my heart.  “And that’s what I love about you Gabriel, you’re always happy to.” </p>
-<p style='font-size:35px; text-indent: 65px; line-height: 2;color: E6B39A; margin:150px;'>
+<p style='font-size:20px; text-indent: 65px; line-height: 1.5;color: E6B39A; margin:50px; padding: 0px 100px;'>
   Now I’m enjoying the next part of my memorable adventure.  I'm studying Computer Science at Purdue University, excited to develop new skills.  If I’m helpful with a hat, imagine what I can do with a hat AND a college degree.  Yes, that’s what I want to do.  I want to help people because I’m always happy to.
 </p>
 
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "200px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
 
    </body>
 
