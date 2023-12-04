@@ -11,6 +11,38 @@
 
     <style>
 
+.regularSize {
+  margin: auto;
+  text-align: center;
+}
+
+.phoneSize {
+  margin: auto;
+  text-align: center;
+  font-size: 20;
+}
+
+@media only screen and (max-width: 600px) {
+  .regularSize {
+    visibility: collapse;
+  }
+
+  .phoneSize {
+    visibility: visible;
+  }
+
+}
+
+@media only screen and (min-width: 600px) {
+    .regularSize {
+      visibility: visible;
+    }
+  
+    .phoneSize {
+      visibility: collapse;
+    }
+  }
+
 .sidenav {
   height: 100%;
   width: 0;
@@ -66,6 +98,12 @@
   left: 16px;
 }
 
+.top-center {
+    position: absolute;
+    top: 8px;
+    left: 0%;
+  }
+
 /* Top right text */
 .top-right {
   position: absolute;
@@ -73,11 +111,10 @@
   right: 16px;
 }
 
-/* Bottom right text */
-.bottom-right {
-  position: absolute;
-  bottom: 8px;
-  right: 16px;
+.bottom-center {
+  position: relative;
+  bottom: -65%;
+  right: 0%;
 }
 
 /* Centered text */
@@ -101,31 +138,70 @@
 
   </head>
 
-  <body style= ';background-color: #032D00'>
+  <body style= 'background-color: #032D00'>
 
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#" style="background-color: 00325D;">Home</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="projects.html">Projects</a>
-</div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#" style="background-color: 00325D;">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="projects.html">Projects</a>
+        </div>
 
+<div class="phoneSize">
 
-
-<div class="container">
-  <img style='align-content: center; margin: -15;' src='leaf-background5.gif' alt='vines' width=105% height=auto>  <!--the animation-->
-    <div class="top-left">
-      <span style="font-size:30px; cursor:pointer color: FF6E00;" onclick="openNav()">&#9776;</span> <!-- the nav button -->
-    </div>
-    <div class="centered"><p style='font-size:125px;line-height: 1;text-align:center; margin: -50; color:FF6E00'>Gabriel Halstead<br></p> </div>
+    <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "100%";
+        }
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }
+        </script>
     
+<div class="top-center">
+    <p style="margin: 20px; color:FF6E00">
+    <span style="font-size:40px; cursor:pointer; color: FF6E00;" onclick="openNav()">&#9776;</span>  <!--the nav button -->
+    </p>
+</div>
+
+</div>
+  
+
+<div class="regularSize">
+    <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "200px";
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }
+        </script>
+    <div class="container">
+        <img style='align-content: center; margin: -15;' src='leaf-background5.gif' alt='vines' width=105% height=auto>  <!--the animation-->
+        <div class="top-left">
+            <span style="font-size: 60px; cursor:pointer; color: FF6E00;" onclick="openNav()">&#9776;</span> <!-- the nav button -->
+        </div>
+        <div class="bottom-center"><p style='font-size:125px;line-height: 1;text-align:center; margin: 20px; color:FF6E00'>Gabriel Halstead<br></p> </div>
+        
+    </div>
 </div>
 
 
-
+<div class="phoneSize">
+    <div class="top-left">
+    <p style='font-size:100px;text-align:center; color:FF6E00;'>Gabriel Halstead<br></p></div>
+</div>
+<div class="regularSize">
 	<p style='font-size:20px; line-height: 2;color: E6B39A; margin:50px; padding: 150px 120px;'> Hi, my name is Gabe!  I work at Chick-fil-A as a trainer in customer service and operations.  My managers trust me completely and love to have me around, but I’m currently majoring in Computer Science at Purdue University and really looking forward to getting some technical experience in my field of study.  I'm currently open to working in a variety of fields including software, data managment, and technical service.  If you would be interested in working with me, please don't hesitate to send me an email from the contact page.  I would be happy to hear about opportunities to work with you!</p>
+</div>
 
+<div class="phoneSize">
+    <div class="top-center">
+  <p style='font-size:18px; line-height: 1.5;color: E6B39A; margin:50px; padding: 300px 0px'> Hi, my name is Gabe!  I work at Chick-fil-A as a trainer in customer service and operations.  My managers trust me completely and love to have me around, but I’m currently majoring in Computer Science at Purdue University and really looking forward to getting some technical experience in my field of study.  I'm currently open to working in a variety of fields including software, data managment, and technical service.  If you would be interested in working with me, please don't hesitate to send me an email from the contact page.  I would be happy to hear about opportunities to work with you!</p>
+</div>
+</div>
 
 	<!--
 <p style='text-align:center;'> <video src='fresh-video-1.mp4' alt='man-waves' width='1500px' height='975px' loop autoplay
@@ -145,15 +221,7 @@ visit the <a href='https://www.blender.org/'>blender website</a>, or talk to me 
 From one bro to another, thank you.</p>
 	-->
 
-<script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "200px";
-}
 
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-</script>
 
    </body>
 
