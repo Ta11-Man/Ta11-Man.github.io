@@ -321,8 +321,15 @@
             // Camera setup
             const left = -1;
             const right = 1;
-            const top = 0.5;
-            const bottom = -0.5;
+            let bottom = 0;
+            let top = 0;
+            if (window.innerWidth > 758) {
+                top = window.innerHeight/window.innerWidth;
+                bottom = -(window.innerHeight/window.innerWidth);
+            } else {
+                top = window.innerWidth/window.innerHeight;
+                bottom = -(window.innerWidth/window.innerHeight);
+            }
             const near = 0.01;
             const far = 10;
             const camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far);
@@ -402,6 +409,15 @@
                 mouseX = (event.accelerationIncludingGravity.x - window.innerWidth / 2) / window.innerWidth;
                 mouseY = (event.accelerationIncludingGravity.y - window.innerHeight / 2) / window.innerHeight;
             });
+            window.addEventListener('deviceorientation', function(event) {
+                 // Get the device's orientation angles
+                var alpha = event.alpha; // rotation around the z-axis
+                var beta = event.beta;  // rotation around the x-axis
+                var gamma = event.gamma; // rotation around the y-axis
+
+                // Rotate the object based on the orientation angles
+                object.rotation.set(beta * Math.PI / 180, gamma * Math.PI / 180, alpha * Math.PI / 180);
+            });
 
 
             // Scroll event listener
@@ -409,17 +425,24 @@
                 targetScrollY = window.scrollY;
             });
 
-            // Window resize handler
-            let initialFOV = camera.fov;
-            let thisthis = camera.aspect
 
             window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
+                //camera.aspect = window.innerWidth / window.innerHeight;
 
                 // Maintain the initial field of view
-                camera.fov = initialFOV;
+                //camera.fov = initialFOV;
 
                 //camera.updateProjectionMatrix();
+                if (window.innerWidth > 758) {
+                    top = window.innerHeight/window.innerWidth;
+                    bottom = -(window.innerHeight/window.innerWidth);
+                } else {
+                    top = window.innerWidth/window.innerHeight;
+                    bottom = -(window.innerWidth/window.innerHeight);
+                }
+                const camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far);
+                camera.zoom = 0.2;
+                camera.position.z = 1;
                 renderer.setSize(window.innerWidth, window.innerHeight);
             });
 
