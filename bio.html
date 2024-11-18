@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Halstead</title>
+    <link rel="icon" type="image/x-svg" href="fav.svg">
+    <style>
+        canvas { 
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: Arial, sans-serif;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 5px;
+        }
+        #error {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: red;
+            font-family: Arial, sans-serif;
+            background: rgba(0, 0, 0, 0);
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+        #info {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+            pointer-events: none;
+        }
+        #content {
+            height: 300vh;
+            position: relative;
+        } 
+        table, th, td {
+          border: none;
+          padding: none;
+          border-spacing: none;
+        }
+        .card {
+            border-radius: 10px;
+            background-color: none;
+            border: none;
+            padding: none;
+        }
+        
+        /* --------------- phone --------------- */
+        @media only screen and (max-width: 768px) {
+            body { 
+                margin: 0;
+                overflow: auto;
+                background-color: #8E7F34;
+            }
+            .flex-container1 {
+                display: flex;
+                flex-direction: column;
+            }
+            .flex-container2 {
+                display: flex;
+                flex-direction: column;
+            }
+            .image-class {
+                width: 50vw;
+                height: auto;
+            }
+            .card-ob {
+                height: 10vw;
+                width: 60vw;
+                background-color: none;
+                outline: 4px solid;
+                outline-color: black;
+                border-radius: 5px;
+                border-spacing: 5vw;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                transition: 1s;
+            }
+            .flex-container1 > div {
+                width: 50vw;
+                margin: 30px;
+                text-align: center;
+                align-items: center;
+                align-content: center;
+            }
+            
+            .flex-container2 > div {
+                width: 60vw;
+                margin: 20px;
+                text-align: center;
+                align-items: center;
+                align-content: center;
+            }
+            .aligner1 {
+                position: absolute;
+                transform: translate(-50%, 0%);
+                top: 80%;left:50%;
+                color: black;
+                font-size: 8px;
+                font-family: 'Josefin Sans', sans-serif;
+            }
+            .aligner2 {
+                position: absolute;
+                transform: translate(-50%, 120%);
+                top: 70%;
+                left:50%;
+                color: black;
+                font-size: 3vw;
+                font-family: 'Josefin Sans', sans-serif;
+            }
+        }
+
+        /* -------------- desktop -------------- */
+        @media only screen and (min-width: 768px) {
+            body { 
+                margin: 0;
+                overflow: hidden; /* no scrolling */
+                background-color: #8E7F34;
+            }
+            .flex-container1 {
+                display: flex;
+                flex-direction: row;
+            }
+            .flex-container2 {
+                display: flex;
+                flex-direction: row;
+            }
+            .image-class {
+                width: 25vw;
+                height: auto;
+            }
+            .card-ob {
+                height: 15vw;
+                width: 15vw;
+                background-color: none;
+                outline: 5px solid;
+                outline-color: black;
+                border-radius: 10px;
+                border-spacing: 5vw;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                transition: 1s;
+            }
+            .flex-container1 > div {
+              width: 25vw;
+              margin: 25px;
+              text-align: center;
+              align-items: center;
+              align-content: center;
+            }
+            
+            .flex-container2 > div {
+              width: 15vw;
+              margin: 25px;
+              text-align: center;
+              align-items: center;
+              align-content: center;
+            }
+            .aligner1 {
+                position: absolute;
+                transform: translate(-50%, -50%);
+                top: 40%;left:50%;
+                color: black;
+                font-size: 8px;
+                font-family: 'Josefin Sans', sans-serif;
+            }
+            .aligner2 {
+                position: absolute;
+                transform: translate(-50%, -20%);
+                top: 70%;
+                left:50%;
+                color: black;
+                font-size: 3vw;
+                font-family: 'Josefin Sans', sans-serif;
+            }
+        }
+
+        .card-ob:hover {
+            scale: 105%;
+            transform: translate(0%, -20%);
+        }
+
+        .card-ob:hover::after {
+            transform: translate(0%, 20%);
+            scale: 100%;
+        }
+        .josefin-sans-<uniquifier> {
+          font-family: "Josefin Sans", sans-serif;
+          font-optical-sizing: auto;
+          font-weight: <weight>;
+          font-style: normal;
+        }
+        a {
+            color: black;
+            font-family: 'Josefin Sans';
+            font-size: 3vw;
+            text-decoration: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="loading">Loading model...</div>
+    <div id="error"></div>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+
+    <div id="text-container" class="aligner1">
+        <!-- <table style="width:50px;">
+          <tr style="scale: 50%;">
+            <th><img src="purdue-logo.svg" style="scale: 80%;"></th>
+            <th><img src="cs-logo.svg" style="scale: 80%;"></th>
+            <th><img src="gpa-logo-clear.svg" style="scale: 80%;"></th>
+          </tr>
+        </table> -->
+        <div class="flex-container1">
+            <div><img src="purdue-logo.svg" class="image-class"></div>
+            <div><img src="cs-logo.svg" class="image-class"></div>
+            <div><img src="gpa-logo-clear.svg" class="image-class"></div>
+        </div>
+    </div>
+
+        <!-- the cards -->
+        <div id="text-container" class="aligner2">
+<!--         <table style="width:100%; border-spacing: 50px;">
+          <tr style="scale: 100%; padding: 30px;">
+            <th class="card">
+                <a href="about">
+                    <div class="card-ob">About</div>
+                </a>
+            </th>
+            <th class="card">
+                <a href="projects">
+                    <div class="card-ob">Projects</div>
+                </a>
+            </th>
+            <th class="card">
+                <a href="resume">
+                    <div class="card-ob">Resume</div>
+                </a>
+            </th>
+            <th class="card">
+                <a href="contact">
+                    <div class="card-ob">Contact</div>
+                </a>
+            </th>
+          </tr>
+        </table> -->
+        <div class="flex-container2">
+            <div>
+            <a href="about">
+                <div class="card-ob">About</div>
+            </a></div>
+            <div>
+            <a href="projects">
+                <div class="card-ob">Projects</div>
+            </a>
+        </div>
+        <div>
+            <a href="resume">
+                <div class="card-ob">Resume</div>
+            </a>
+        </div>
+        <div>
+            <a href="contact">
+                <div class="card-ob">Contact</div>
+            </a>
+        </div>
+        </div>
+    </div>
+
+    <!-- Load Three.js and required loaders -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MTLLoader.js"></script>
+
+    <script>
+        const errorDiv = document.getElementById('error');
+        const loadingDiv = document.getElementById('loading');
+        let controls;
+
+        function showError(message) {
+            console.error(message);
+            errorDiv.textContent += message + '\n';
+        }
+
+        // Check if Three.js loaded
+        if (typeof THREE === 'undefined') {
+            showError('Three.js failed to load');
+        } else {
+            console.log('Three.js loaded successfully');
+        }
+
+        try {
+            // Scene setup
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x8E7F34);
+            console.log('Scene created');
+
+            // Camera setup
+            const left = -1;
+            const right = 1;
+            const top = 0.5;
+            const bottom = -0.5;
+            const near = 0.01;
+            const far = 10;
+            const camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far);
+            camera.zoom = 0.2;
+            camera.position.z = 1;
+            console.log('Camera created');
+
+            // Renderer setup
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.body.appendChild(renderer.domElement);
+            console.log('Renderer created');
+
+            // Add a grid helper for reference
+            // const gridHelper = new THREE.GridHelper(10, 10);
+            // scene.add(gridHelper);
+            // console.log('Grid helper added');
+
+            // Add an axes helper
+            // const axesHelper = new THREE.AxesHelper(5);
+            // scene.add(axesHelper);
+            // console.log('Axes helper added');
+
+            // Lighting setup
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+            scene.add(ambientLight);
+            console.log('Ambient light added');
+
+            const directionalLight1 = new THREE.DirectionalLight(0xffffff, 2.3);
+            directionalLight1.position.set(0, 1, -1);
+            scene.add(directionalLight1);
+            console.log('Directional 1 light added');
+            const directionalLight2 = new THREE.DirectionalLight(0xffffff, 2.3);
+            directionalLight2.position.set(0, -1, -1);
+            scene.add(directionalLight2);
+            console.log('Directional 1 light added');
+
+            // Controls setup
+            /*if (typeof THREE.OrbitControls === 'undefined') {
+                showError('OrbitControls failed to load');
+            } else {
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.9;
+                controls.target.set(0, 0, 0);
+                controls.update();
+                console.log('Controls created');
+            }*/
+
+            // Camera orbit parameters
+            let radius = 1; // Distance from center
+            let theta = 0;   // Horizontal angle
+            let phi = 0;     // Vertical angle
+            
+            // Variables for mouse control
+            let targetTheta = 0;
+            let targetPhi = 0;
+
+            // Variables for mouse control
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetRotationX = 0;
+            let targetRotationY = 0;
+
+            // Variables for scroll control
+            let scrollY = 0;
+            let targetRadius = radius;
+            let targetScrollY = 0;
+
+            // Mouse move event listener
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2) / window.innerWidth;
+                mouseY = (event.clientY - window.innerHeight / 2) / window.innerHeight;
+            });
+            document.addEventListener('devicemotion', (event) => {
+                mouseX = (event.accelerationIncludingGravity.x - window.innerWidth / 2) / window.innerWidth;
+                mouseY = (event.accelerationIncludingGravity.y - window.innerHeight / 2) / window.innerHeight;
+            });
+
+
+            // Scroll event listener
+            window.addEventListener('scroll', () => {
+                targetScrollY = window.scrollY;
+            });
+
+            // Window resize handler
+            let initialFOV = camera.fov;
+            let thisthis = camera.aspect
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+
+                // Maintain the initial field of view
+                camera.fov = initialFOV;
+
+                //camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+
+            // Model loading
+            if (typeof THREE.OBJLoader === 'undefined' || typeof THREE.MTLLoader === 'undefined') {
+                showError('OBJLoader or MTLLoader failed to load');
+            } else {
+                console.log('Starting to load model');
+                
+                // First load the MTL (material) file
+                const mtlLoader = new THREE.MTLLoader();
+                if (window.innerWidth > 758) {
+                    mtlLoader.load(
+                        'gwh.mtl',
+                        (materials) => {
+                            materials.preload();
+                            console.log('Materials loaded successfully');
+
+                            // Then load the OBJ file with the materials
+                            const objLoader = new THREE.OBJLoader();
+                            objLoader.setMaterials(materials);
+                            objLoader.load(
+                                'gwh.obj',
+                                (object) => {
+                                    console.log('Model loaded successfully');
+                                    
+                                    // Center the model
+                                    const box = new THREE.Box3().setFromObject(object);
+                                    const center = box.getCenter(new THREE.Vector3());
+                                    object.position.sub(center);
+                                    object.position.x = 0.005;
+                                    object.position.y = 0.3;
+                                    
+                                    // Scale the model to fit the view
+                                    const size = box.getSize(new THREE.Vector3());
+                                    const maxDim = Math.max(size.x, size.y, size.z);
+                                    const scale = 1.5 / maxDim;
+                                    object.scale.multiplyScalar(scale);
+                                    
+                                    scene.add(object);
+                                    loadingDiv.style.display = 'none';
+                                },
+                                (progress) => {
+                                    console.log('Loading progress:', (progress.loaded / progress.total * 100) + '%');
+                                },
+                                (error) => {
+                                    showError('Error loading OBJ: ' + error.message);
+                                    loadingDiv.textContent = 'Error loading model';
+                                }
+                            );
+                        },
+                        undefined,
+                        (error) => {
+                            showError('Error loading MTL: ' + error.message);
+                            loadingDiv.textContent = 'Error loading materials';
+                        }
+                    );
+                } else {
+                    mtlLoader.load(
+                        'just-g.mtl',
+                        (materials) => {
+                            materials.preload();
+                            console.log('Materials loaded successfully');
+
+                            // Then load the OBJ file with the materials
+                            const objLoader = new THREE.OBJLoader();
+                            objLoader.setMaterials(materials);
+                            objLoader.load(
+                                'just-g.obj',
+                                (object) => {
+                                    console.log('Model loaded successfully');
+                                    
+                                    // Center the model
+                                    const box = new THREE.Box3().setFromObject(object);
+                                    const center = box.getCenter(new THREE.Vector3());
+                                    object.position.sub(center);
+                                    object.position.x = 0.0;
+                                    object.position.y = 0.0;
+                                    
+                                    // Scale the model to fit the view
+                                    const size = box.getSize(new THREE.Vector3());
+                                    const maxDim = Math.max(size.x, size.y, size.z);
+                                    const scale = 1.5 / maxDim;
+                                    object.scale.multiplyScalar(scale);
+                                    
+                                    scene.add(object);
+                                    loadingDiv.style.display = 'none';
+                                },
+                                (progress) => {
+                                    console.log('Loading progress:', (progress.loaded / progress.total * 100) + '%');
+                                },
+                                (error) => {
+                                    showError('Error loading OBJ: ' + error.message);
+                                    loadingDiv.textContent = 'Error loading model';
+                                }
+                            );
+                        },
+                        undefined,
+                        (error) => {
+                            showError('Error loading MTL: ' + error.message);
+                            loadingDiv.textContent = 'Error loading materials';
+                        }
+                    );
+                }
+            }
+
+
+            // Function to update camera position
+            function updateCameraPosition() {
+                // Convert spherical coordinates to Cartesian
+                const x = radius * Math.sin(theta) * Math.cos(phi);
+                const y = radius * Math.sin(phi);
+                const z = radius * Math.cos(theta) * Math.cos(phi);
+                camera.position.set(x, y, z);
+                camera.lookAt(0, 0, 0);
+            }
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                // Smooth camera rotation based on mouse position
+                targetRotationX = mouseX * 0.5;
+                targetRotationY = mouseY * 0.3;
+                
+                camera.rotation.y += (targetRotationX - camera.rotation.y) * 0.1;
+                camera.rotation.x += (targetRotationY - camera.rotation.x) * 0.1;
+
+                // Smooth camera movement based on scroll
+                scrollY += (targetScrollY - scrollY) * 0.1;
+                
+
+                // locational logic to center rotation
+                targetTheta = mouseX * Math.PI * 0.2;
+                targetPhi = mouseY * Math.PI * 0.1;
+                
+                // Smooth transitions
+                theta += (targetTheta - theta) * 0.05;
+                phi += (targetPhi - phi) * 0.05;
+                radius += (targetRadius - radius) * 0.1;
+
+                // Limit vertical rotation
+                phi = Math.max(Math.min(phi, Math.PI / 2 - 0.1), -Math.PI / 2 + 0.1);
+
+                // Update camera position
+                updateCameraPosition();
+
+                renderer.render(scene, camera);
+            }
+            updateCameraPosition();
+            animate();
+            console.log('Animation loop started');
+
+        } catch (error) {
+            showError('Setup error: ' + error.message);
+        }
+
+    </script>
+</body>
+</html>
