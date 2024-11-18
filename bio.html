@@ -323,7 +323,7 @@
             const right = 1;
             let bottom = 0;
             let top = 0;
-            if (window.innerWidth > 758) {
+            if (window.innerWidth > 550) {
                 top = window.innerHeight/window.innerWidth;
                 bottom = -(window.innerHeight/window.innerWidth);
             } else {
@@ -400,61 +400,34 @@
             let targetRadius = radius;
             let targetScrollY = 0;
 
-            // Mouse move event listener
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX - window.innerWidth / 2) / window.innerWidth;
-                mouseY = (event.clientY - window.innerHeight / 2) / window.innerHeight;
-            });
-            let isDragging = false;
-            let previousTouchPosition = {
-              x: 0,
-              y: 0
-            };
+            document.addEventListener('devicemotion', (event) => {
+                let acceleration = event.acceleration;
+                let rotationRate = event.rotationRate;
 
-            document.addEventListener('touchstart', (event) => {
-              isDragging = true;
-              previousTouchPosition = {
-                x: event.touches[0].clientX,
-                y: event.touches[0].clientY
-              };
+                // Normalize the values to be between -0.5 and 0.5
+                mouseX = (rotationRate.gamma / 90) - 0.5;
+                mouseY = (rotationRate.beta / 90) - 0.5;
             });
 
-            document.addEventListener('touchend', (event) => {
-              isDragging = false;
-            });
-
-            document.addEventListener('touchmove', (event) => {
-              if (!isDragging) {
-                return;
-              }
-
-              const deltaMove = {
-                x: event.touches[0].clientX - previousTouchPosition.x,
-                y: event.touches[0].clientY - previousTouchPosition.y
-              };
-
-              previousTouchPosition = {
-                x: event.touches[0].clientX,
-                y: event.touches[0].clientY
-              };
-
-              // Calculate the normalized touch position
-              const mouseX = (deltaMove.x - window.innerWidth / 2) / window.innerWidth;
-              const mouseY = (deltaMove.y - window.innerHeight / 2) / window.innerHeight;
-
-              // Use the normalized touch position for your Three.js scene
-              // For example, you can rotate the camera or update the position of an object
-              camera.rotation.y = mouseX * Math.PI * 2;
-              camera.rotation.x = mouseY * Math.PI;
-            });
-
-
-
-
-            // Scroll event listener
-            window.addEventListener('scroll', () => {
-                targetScrollY = window.scrollY;
-            });
+            if (window.innerWidth < 550) {
+                // Scroll event listener
+                window.addEventListener('scroll', () => {
+                    targetScrollY = window.scrollY;
+                    if (targetScrollY != 0) {
+                        mouseY = 2;
+                        mouseX = 0.5;
+                    } else {
+                        mouseY = 0;
+                        mouseX = 0;
+                    }
+                });
+            } else {
+                // Mouse move event listener
+                document.addEventListener('mousemove', (event) => {
+                    mouseX = (event.clientX - window.innerWidth / 2) / window.innerWidth;
+                    mouseY = (event.clientY - window.innerHeight / 2) / window.innerHeight;
+                });
+            }
 
 
             window.addEventListener('resize', () => {
@@ -464,7 +437,7 @@
                 //camera.fov = initialFOV;
 
                 //camera.updateProjectionMatrix();
-                if (window.innerWidth > 758) {
+                if (window.innerWidth > 550) {
                     top = window.innerHeight/window.innerWidth;
                     bottom = -(window.innerHeight/window.innerWidth);
                 } else {
