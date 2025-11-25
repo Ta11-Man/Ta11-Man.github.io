@@ -14,81 +14,69 @@
 
     <link rel="icon" href="ninja-essence-head.svg" type="image/svg" />
 
-    <!-- <link
-      href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    /> -->
-    <!-- <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap"
-        rel="stylesheet"
-      />
-    </noscript> -->
     <style>
+      /*
+Source - https://stackoverflow.com/a
+Posted by Nicolas Modrzyk, modified by community. See post 'Timeline' for change history
+Retrieved 2025-11-25, License - CC BY-SA 3.0
+*/
+
+      @font-face {
+        font-family: Hurmit;
+        src: url("font/HurmitNerdFont-Regular.otf");
+      }
+      @font-face {
+        font-family: Hurmit;
+        font-weight: bold;
+        src: url("font/HurmitNerdFont-Bold.otf");
+      }
+      @font-face {
+        font-family: Hurmit;
+        font-weight: light;
+        src: url("font/HurmitNerdFont-Light.otf");
+      }
+      @font-face {
+        font-family: Hurmit;
+        font-style: italic;
+        src: url("font/HurmitNerdFont-Italic.otf");
+      }
+      @font-face {
+        font-family: HurmitMono;
+        font-weight: bold;
+        src: url("font/HurmitNerdFontMono-Bold.otf");
+      }
+      @font-face {
+        font-family: HurmitMono;
+        src: url("font/HurmitNerdFontMono-Regular.otf");
+      }
+
       :root {
-        --Custom: "Comic Relief", sans-serif;
+        --Hurmit: "Hurmit";
+        --Hurmit-b: "Hurmit", bold;
+        --Hurmit-m: "HurmitMono";
         /* CUSTOMIZE LOADER HERE: */
         --loader-color: #16407a; /* Spinner color and text color */
-        --loader-bg: #333333; /* Background color of overlay */
-      }
-
-      /* Loading Overlay and Spinner */
-      #loading-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--loader-bg);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease-out;
-      }
-
-      #loading-overlay.hidden {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .loading-spinner {
-        width: 60px; /* Change spinner size */
-        height: 60px;
-        border: 4px solid rgba(22, 64, 122, 0.1); /* Border color (faded version of --loader-color) */
-        border-top: 4px solid var(--loader-color); /* Top border (active indicator) */
-        border-radius: 50%;
-        animation: spin-loader 1s linear infinite; /* Change 1s to make it faster/slower */
-      }
-
-      @keyframes spin-loader {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      .loading-text {
-        position: absolute;
-        bottom: 40px;
-        font-family: var(--Custom);
-        color: var(--loader-color);
-        font-size: 18px; /* Change text size */
-        letter-spacing: 2px; /* Change letter spacing */
+        --github-light: #212830;
+        --github-med: #0d1117;
+        --github-dark: #010409;
+        --teal-light: #07ffedff;
+        --teal-med: #006d6bff;
+        --teal-dark: #003632ff;
+        --black: black;
+        --testing: red;
+        --glow: drop-shadow(0px 0px 8px rgba(7, 255, 237, 0.5));
+        --glow-tight: drop-shadow(0px 0px 1px rgba(7, 255, 237, 0.7));
+        --bg-color: var(--github-med);
       }
 
       .ninja-wrapper {
         position: absolute;
         bottom: 2%;
-        right: 0%;
+        right: min(30vh, 50vw);
         height: 32vh;
         width: auto;
         pointer-events: none;
-        transform: translateX(-50%);
+        transform: translateX(50%);
       }
       .eyes-container {
         position: absolute;
@@ -129,206 +117,197 @@
       body {
         margin: 0;
         overflow: hidden !important;
-        position: fixed;
+        /* position: fixed; */
         width: 100vw;
         height: 100vh;
         scroll-behavior: none;
-        background-color: #ede4b3;
+        background-color: var(--bg-color);
         text-align: center;
       }
       img {
-        filter: drop-shadow(0px 0px 8px rgba(7, 255, 237, 0.5));
+        filter: var(--glow);
       }
       p {
         font-size: 3.5vh;
         text-align: center;
-        font-family: var(--Custom);
-        color: #000000;
+        color: var(--teal-med);
+        font-family: var(--Hurmit);
         margin: 5vw;
+        filter: var(--glow-tight);
+        z-index: 10;
+        position: relative;
       }
-      .pc-tree {
+      h1 {
+        position: relative;
+        font-family: var(--Hurmit);
+        /* font-style: italic; */
+        /* font-weight: bold; */
+        filter: var(--glow);
+        color: var(--teal-light);
+        z-index: 10;
+      }
+      .cover {
+        background-color: var(--testing);
+        z-index: 10;
         position: absolute;
-        height: 78vh;
-        width: auto;
+        width: 100vw;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+        max-width: 50vh;
       }
 
-      @media (max-width: 700px) {
+      @media (max-width: 60vh) {
         .pc {
           display: none;
         }
+        /* .ninja-wrapper {
+          position: absolute;
+          bottom: 2%;
+          right: 0vw;
+          background-color: var(--testing);
+          margin: 0;
+          height: 32vh;
+          width: auto;
+          pointer-events: none;
+          transform: translateX(-50%);
+        } */
       }
     </style>
   </head>
   <body>
     <!-- Loading Overlay -->
-    <div id="loading-overlay">
-      <div
-        style="
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        "
-      ></div>
 
-      <div
-        id="decoration"
-        style="
-          position: absolute;
-          top: 0;
-          left: 0;
-          scale: 1;
-          width: 100%;
-          height: 100%;
-          transition: scale 0.5s cubic-bezier(0, 2, 0.6, 1);
-        "
-      >
-        <style>
-          #decoration img {
-            transition: transform 0.7s cubic-bezier(0, 1, 0.6, 1);
-            transform: none; /* Default position */
-          }
-
-          #decoration.slide-out .ninja-wrapper {
-            /* transform: translateY(40vh) scale(4); */
-            transform: scaleX(0);
-            transition: transform 0.7s cubic-bezier(0, 1, 0.6, 1);
-          }
-          #decoration .ninja-wrapper {
-            transition: transform 0.7s cubic-bezier(0, 1, 0.6, 1);
-          }
-          @media (max-width: 600px) {
-          }
-        </style>
-
-        <div class="ninja-wrapper pc-ninja">
-          <img
-            id="ninja"
-            src="ninja-essence-noeye.svg"
-            alt="Ninja"
-            loading="eager"
-            fetchpriority="high"
-            style="display: block; width: auto; height: 35vh"
-          />
-          <div class="eyes-container">
-            <div class="eye left"><div class="pupil"></div></div>
-            <div class="eye right"><div class="pupil"></div></div>
-          </div>
-        </div>
-        <script>
-          const eyes = document.querySelectorAll(".eye");
-          const pupils = document.querySelectorAll(".pupil");
-          const maxPupilMove = 1.2; // in vh units
-
-          function movePupils(e) {
-            const ran = Math.random();
-            const screenQuarter =
-              Math.max(window.innerWidth, window.innerHeight) * 0.8;
-            eyes.forEach((eye, i) => {
-              const rect = eye.getBoundingClientRect();
-              const cx = rect.left + rect.width / 2;
-              const cy = rect.top + rect.height / 2;
-              const dx = e.clientX - cx;
-              const dy = e.clientY - cy;
-              const distFromEye = Math.hypot(dx, dy);
-              const angle = Math.atan2(dy, dx);
-              const maxMove = 1.5; // in vh
-              let dist = 0;
-              if (distFromEye < screenQuarter) {
-                // Only move for the portion beyond the threshold
-                const excess = distFromEye - screenQuarter;
-                // scale excess to maxMove at 1/4 screen further
-                dist = 2; // Math.min(maxMove, (excess / screenQuarter) * maxMove);
-              }
-              const pupil = pupils[i];
-              pupil.style.left = 1 + Math.cos(angle) * dist + "vh";
-              pupil.style.top = 1 + Math.sin(angle) * dist + "vh";
-            });
-          }
-
-          document.addEventListener("mousemove", movePupils);
-
-          let contractPupilsTimeout;
-          function contractPupils() {
-            pupils.forEach((pupil) => {
-              pupil.style.transform = "scale(0.5)";
-            });
-            clearTimeout(contractPupilsTimeout);
-          }
-          function resetEyes() {
-            pupils.forEach((pupil) => {
-              pupil.style.transform = "";
-              pupil.style.left = "0.8vh";
-              pupil.style.top = "0.8vh";
-            });
-          }
-          function openEyes() {
-            pupils.forEach((pupil) => {
-              pupil.style.transform = "scaleY(1)";
-            });
-          }
-          function blink() {
-            pupils.forEach((pupil) => {
-              pupil.style.transform = "scaleY(0.2)";
-              setTimeout(openEyes, 300);
-            });
-          }
-          document.addEventListener("mousedown", contractPupils);
-          document.addEventListener("mouseup", resetEyes);
-          document.addEventListener("mouseleave", resetEyes);
-          setInterval(blink, 10000);
-        </script>
-      </div>
-
-      <!-- content sections -->
-      <div id="home-content" class="content-section show">
+    <div
+      id="decoration"
+      style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        scale: 1;
+        width: 100%;
+        height: 100%;
+        transition: scale 0.5s cubic-bezier(0, 2, 0.6, 1);
+      "
+    >
+      <div class="ninja-wrapper pc-ninja">
         <img
-          src="https://avatars.githubusercontent.com/u/143021084"
-          alt="Github profile picture"
-          style="
-            position: absolute;
-            width: 100vw;
-            border-radius: 50%;
-            top: 0;
-            right: 0;
-          "
+          id="ninja"
+          src="ninja-essence-noeye.svg"
+          alt="Ninja"
+          loading="eager"
+          fetchpriority="high"
+          style="display: block; width: auto; height: 35vh"
         />
-        <div class="content-inner">
-          <h1
-            class="content-inner-h1"
-            style="
-              font-size: 12vh;
-              text-align: center;
-              font-family: var(--Custom);
-              color: black;
-              filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35))
-                drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.35));
-              -webkit-text-stroke: 0.3px white;
-              text-stroke: 0.3px white;
-              margin-bottom: 0px;
-            "
-          >
-            Gabe Halstead
-          </h1>
-          <p
-            class="content-inner-p"
-            style="
-              font-size: 4vh;
-              text-align: center;
-              font-family: var(--Custom);
-              color: #000000;
-              filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35))
-                drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.35));
-              -webkit-text-stroke: 0.2px white;
-              text-stroke: 0.2px white;
-              margin-top: 0px;
-            "
-          >
-            Making technology work for you!
-          </p>
+        <div class="eyes-container">
+          <div class="eye left"><div class="pupil"></div></div>
+          <div class="eye right"><div class="pupil"></div></div>
         </div>
       </div>
+      <script>
+        const eyes = document.querySelectorAll(".eye");
+        const pupils = document.querySelectorAll(".pupil");
+        const maxPupilMove = 1.2; // in vh units
+
+        function movePupils(e) {
+          const ran = Math.random();
+          const screenQuarter =
+            Math.max(window.innerWidth, window.innerHeight) * 0.8;
+          eyes.forEach((eye, i) => {
+            const rect = eye.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = e.clientX - cx;
+            const dy = e.clientY - cy;
+            const distFromEye = Math.hypot(dx, dy);
+            const angle = Math.atan2(dy, dx);
+            const maxMove = 1.5; // in vh
+            let dist = 0;
+            if (distFromEye < screenQuarter) {
+              // Only move for the portion beyond the threshold
+              const excess = distFromEye - screenQuarter;
+              // scale excess to maxMove at 1/4 screen further
+              dist = 2; // Math.min(maxMove, (excess / screenQuarter) * maxMove);
+            }
+            const pupil = pupils[i];
+            pupil.style.left = 1 + Math.cos(angle) * dist + "vh";
+            pupil.style.top = 1 + Math.sin(angle) * dist + "vh";
+          });
+        }
+
+        document.addEventListener("mousemove", movePupils);
+
+        let contractPupilsTimeout;
+        function contractPupils() {
+          pupils.forEach((pupil) => {
+            pupil.style.transform = "scale(0.5)";
+          });
+          clearTimeout(contractPupilsTimeout);
+        }
+        function resetEyes() {
+          pupils.forEach((pupil) => {
+            pupil.style.transform = "";
+            pupil.style.left = "0.8vh";
+            pupil.style.top = "0.8vh";
+          });
+        }
+        function openEyes() {
+          pupils.forEach((pupil) => {
+            pupil.style.transform = "scaleY(1)";
+          });
+        }
+        function blink() {
+          pupils.forEach((pupil) => {
+            pupil.style.transform = "scaleY(0.2)";
+            setTimeout(openEyes, 300);
+          });
+        }
+        document.addEventListener("mousedown", contractPupils);
+        document.addEventListener("mouseup", resetEyes);
+        document.addEventListener("mouseleave", resetEyes);
+        setInterval(blink, 10000);
+      </script>
+    </div>
+
+    <!-- content sections -->
+    <div
+      style="
+        position: absolute;
+        width: 100vw;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+        max-width: 50vh;
+        z-index: 20;
+        background-color: red;
+      "
+    ></div>
+    <img
+      src="https://avatars.githubusercontent.com/u/143021084"
+      alt="Github profile picture"
+      style="
+        position: absolute;
+        width: 100vw;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+        max-width: 60vh;
+        z-index: 1;
+      "
+    />
+    <div
+      style="
+        position: absolute;
+        width: 100vw;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+        max-width: 60vh;
+        z-index: 1;
+      "
+    >
+      <h1>Ta11-Man</h1>
+      <p>Gabriel Halstead, Github extraordinaire.</p>
     </div>
   </body>
 </html>
