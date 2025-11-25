@@ -1,228 +1,334 @@
-<DOCTYPE html>
-
- <html>
-
-
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ta11 Man</title>
+    <meta property="og:title" content="Ta11 Man's Github" />
+    <meta
+      property="og:description"
+      content="Visual front for Gabe Halstead's Github, Computer Science Student and System Developer."
+    />
+    <meta property="og:image" content="ninja-essence-head" />
+    <meta property="og:url" content="https://Ta11-Man.github.io" />
 
-    <title>Gabriel Halstead</title>
+    <link rel="icon" href="ninja-essence-head.svg" type="image/svg" />
 
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-
+    <!-- <link
+      href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    /> -->
+    <!-- <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript> -->
     <style>
+      :root {
+        --Custom: "Comic Relief", sans-serif;
+        /* CUSTOMIZE LOADER HERE: */
+        --loader-color: #16407a; /* Spinner color and text color */
+        --loader-bg: #333333; /* Background color of overlay */
+      }
 
-.regularSize {
-  margin: auto;
-  text-align: center;
-}
+      /* Loading Overlay and Spinner */
+      #loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--loader-bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
 
-.phoneSize {
-  margin: auto;
-  text-align: center;
-  font-size: 20;
-}
+      #loading-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
 
-@media only screen and (max-width: 600px) {
-  .regularSize {
-    visibility: collapse;
-  }
+      .loading-spinner {
+        width: 60px; /* Change spinner size */
+        height: 60px;
+        border: 4px solid rgba(22, 64, 122, 0.1); /* Border color (faded version of --loader-color) */
+        border-top: 4px solid var(--loader-color); /* Top border (active indicator) */
+        border-radius: 50%;
+        animation: spin-loader 1s linear infinite; /* Change 1s to make it faster/slower */
+      }
 
-  .phoneSize {
-    visibility: visible;
-  }
+      @keyframes spin-loader {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 
-}
+      .loading-text {
+        position: absolute;
+        bottom: 40px;
+        font-family: var(--Custom);
+        color: var(--loader-color);
+        font-size: 18px; /* Change text size */
+        letter-spacing: 2px; /* Change letter spacing */
+      }
 
-@media only screen and (min-width: 600px) {
-    .regularSize {
-      visibility: visible;
-    }
-  
-    .phoneSize {
-      visibility: collapse;
-    }
-  }
-
-.sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #5F201B;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.sidenav a {
-  padding: 8px 8px 8px 20px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #f2f2f2;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidenav a:hover {
-  color: #000000;
-  background-color: #00325D;
-}
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-.container {
-  position: relative;
-  text-align: center;
-  color: FF6E00;
-}
-
-/* Bottom left text */
-.bottom-left {
-  position: absolute;
-  bottom: 8px;
-  left: 16px;
-}
-
-/* Top left text */
-.top-left {
-  position: absolute;
-  top: 8px;
-  left: 16px;
-}
-
-.top-center {
-    position: absolute;
-    top: 8px;
-    left: 0%;
-  }
-
-/* Top right text */
-.top-right {
-  position: absolute;
-  top: 8px;
-  right: 16px;
-}
-
-.bottom-center {
-  position: relative;
-  bottom: -65%;
-  right: 0%;
-}
-
-/* Centered text */
-.centered {
-  position: absolute;
-  top: 110%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.sidenav .closebtn:hover {
-  
-  background-color: #5F201B;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
+      .ninja-wrapper {
+        position: absolute;
+        bottom: 2%;
+        right: 0%;
+        height: 32vh;
+        width: auto;
+        pointer-events: none;
+        transform: translateX(-50%);
+      }
+      .eyes-container {
+        position: absolute;
+        left: 34%; /* adjust as needed to align with ninja's face */
+        top: 19%; /* adjust as needed to align with ninja's face */
+        width: 12vh;
+        height: 6vh;
+        pointer-events: auto;
+      }
+      .eye {
+        position: absolute;
+        width: 4.5vh;
+        height: 4.5vh;
+        background: #007265ff;
+        border-radius: 20%;
+        left: 0;
+        bottom: 0;
+        transition: transform 0.2s cubic-bezier(0.4, 2, 0.6, 1);
+        overflow: hidden;
+      }
+      .eye.right {
+        left: 5vh;
+      }
+      .pupil {
+        position: absolute;
+        width: 3vh;
+        height: 3vh;
+        background: #10f2f4ff;
+        border-radius: 20%;
+        top: 0.8vh; /* center pupil in 4.5vh eye */
+        left: 0.8vh;
+        transition: left 0.08s, top 0.08s;
+        filter: blur(3px);
+        -webkit-filter: blur(3px);
+      }
     </style>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden !important;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        scroll-behavior: none;
+        background-color: #ede4b3;
+        text-align: center;
+      }
+      img {
+        filter: drop-shadow(0px 0px 8px rgba(7, 255, 237, 0.5));
+      }
+      p {
+        font-size: 3.5vh;
+        text-align: center;
+        font-family: var(--Custom);
+        color: #000000;
+        margin: 5vw;
+      }
+      .pc-tree {
+        position: absolute;
+        height: 78vh;
+        width: auto;
+      }
 
+      @media (max-width: 700px) {
+        .pc {
+          display: none;
+        }
+      }
+    </style>
   </head>
+  <body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay">
+      <div
+        style="
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        "
+      ></div>
 
-  <body style= 'background-color: #032D00'>
+      <div
+        id="decoration"
+        style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          scale: 1;
+          width: 100%;
+          height: 100%;
+          transition: scale 0.5s cubic-bezier(0, 2, 0.6, 1);
+        "
+      >
+        <style>
+          #decoration img {
+            transition: transform 0.7s cubic-bezier(0, 1, 0.6, 1);
+            transform: none; /* Default position */
+          }
 
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#" style="background-color: 00325D;">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="projects.html">Projects</a>
+          #decoration.slide-out .ninja-wrapper {
+            /* transform: translateY(40vh) scale(4); */
+            transform: scaleX(0);
+            transition: transform 0.7s cubic-bezier(0, 1, 0.6, 1);
+          }
+          #decoration .ninja-wrapper {
+            transition: transform 0.7s cubic-bezier(0, 1, 0.6, 1);
+          }
+          @media (max-width: 600px) {
+          }
+        </style>
+
+        <div class="ninja-wrapper pc-ninja">
+          <img
+            id="ninja"
+            src="ninja-essence-noeye.svg"
+            alt="Ninja"
+            loading="eager"
+            fetchpriority="high"
+            style="display: block; width: auto; height: 35vh"
+          />
+          <div class="eyes-container">
+            <div class="eye left"><div class="pupil"></div></div>
+            <div class="eye right"><div class="pupil"></div></div>
+          </div>
         </div>
+        <script>
+          const eyes = document.querySelectorAll(".eye");
+          const pupils = document.querySelectorAll(".pupil");
+          const maxPupilMove = 1.2; // in vh units
 
-<div class="phoneSize">
+          function movePupils(e) {
+            const ran = Math.random();
+            const screenQuarter =
+              Math.max(window.innerWidth, window.innerHeight) * 0.8;
+            eyes.forEach((eye, i) => {
+              const rect = eye.getBoundingClientRect();
+              const cx = rect.left + rect.width / 2;
+              const cy = rect.top + rect.height / 2;
+              const dx = e.clientX - cx;
+              const dy = e.clientY - cy;
+              const distFromEye = Math.hypot(dx, dy);
+              const angle = Math.atan2(dy, dx);
+              const maxMove = 1.5; // in vh
+              let dist = 0;
+              if (distFromEye < screenQuarter) {
+                // Only move for the portion beyond the threshold
+                const excess = distFromEye - screenQuarter;
+                // scale excess to maxMove at 1/4 screen further
+                dist = 2; // Math.min(maxMove, (excess / screenQuarter) * maxMove);
+              }
+              const pupil = pupils[i];
+              pupil.style.left = 1 + Math.cos(angle) * dist + "vh";
+              pupil.style.top = 1 + Math.sin(angle) * dist + "vh";
+            });
+          }
 
-    <script>
-        function openNav() {
-          document.getElementById("mySidenav").style.width = "100%";
-        }
-        function closeNav() {
-          document.getElementById("mySidenav").style.width = "0";
-        }
+          document.addEventListener("mousemove", movePupils);
+
+          let contractPupilsTimeout;
+          function contractPupils() {
+            pupils.forEach((pupil) => {
+              pupil.style.transform = "scale(0.5)";
+            });
+            clearTimeout(contractPupilsTimeout);
+          }
+          function resetEyes() {
+            pupils.forEach((pupil) => {
+              pupil.style.transform = "";
+              pupil.style.left = "0.8vh";
+              pupil.style.top = "0.8vh";
+            });
+          }
+          function openEyes() {
+            pupils.forEach((pupil) => {
+              pupil.style.transform = "scaleY(1)";
+            });
+          }
+          function blink() {
+            pupils.forEach((pupil) => {
+              pupil.style.transform = "scaleY(0.2)";
+              setTimeout(openEyes, 300);
+            });
+          }
+          document.addEventListener("mousedown", contractPupils);
+          document.addEventListener("mouseup", resetEyes);
+          document.addEventListener("mouseleave", resetEyes);
+          setInterval(blink, 10000);
         </script>
-    
-<div class="top-center">
-    <p style="margin: 20px; color:FF6E00">
-    <span style="font-size:40px; cursor:pointer; color: FF6E00;" onclick="openNav()">&#9776;</span>  <!--the nav button -->
-    </p>
-</div>
+      </div>
 
-</div>
-  
-
-<div class="regularSize">
-    <script>
-        function openNav() {
-          document.getElementById("mySidenav").style.width = "200px";
-        }
-        
-        function closeNav() {
-          document.getElementById("mySidenav").style.width = "0";
-        }
-        </script>
-    <div class="container">
-        <img style='align-content: center; margin: -15;' src='leaf-background5.gif' alt='vines' width=105% height=auto>  <!--the animation-->
-        <div class="top-left">
-            <span style="font-size: 60px; cursor:pointer; color: FF6E00;" onclick="openNav()">&#9776;</span> <!-- the nav button -->
+      <!-- content sections -->
+      <div id="home-content" class="content-section show">
+        <img
+          src="https://avatars.githubusercontent.com/u/143021084"
+          alt="Github profile picture"
+          style="
+            position: absolute;
+            width: 100vw;
+            border-radius: 50%;
+            top: 0;
+            right: 0;
+          "
+        />
+        <div class="content-inner">
+          <h1
+            class="content-inner-h1"
+            style="
+              font-size: 12vh;
+              text-align: center;
+              font-family: var(--Custom);
+              color: black;
+              filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35))
+                drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.35));
+              -webkit-text-stroke: 0.3px white;
+              text-stroke: 0.3px white;
+              margin-bottom: 0px;
+            "
+          >
+            Gabe Halstead
+          </h1>
+          <p
+            class="content-inner-p"
+            style="
+              font-size: 4vh;
+              text-align: center;
+              font-family: var(--Custom);
+              color: #000000;
+              filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35))
+                drop-shadow(-8px 8px 3px rgba(0, 0, 0, 0.35));
+              -webkit-text-stroke: 0.2px white;
+              text-stroke: 0.2px white;
+              margin-top: 0px;
+            "
+          >
+            Making technology work for you!
+          </p>
         </div>
-        <div class="bottom-center"><p style='font-size:125px;line-height: 1;text-align:center; margin: 20px; color:FF6E00'>Gabriel Halstead<br></p> </div>
-        
+      </div>
     </div>
-</div>
-
-
-<div class="phoneSize">
-    <div class="top-left">
-    <p style='font-size:100px;text-align:center; color:FF6E00;'>Gabriel Halstead<br></p></div>
-</div>
-<div class="regularSize">
-	<p style='font-size:20px; line-height: 2;color: E6B39A; margin:50px; padding: 150px 120px;'> Hi, my name is Gabe!  I work at Chick-fil-A as a trainer in customer service and operations.  My managers trust me completely and love to have me around, but I’m currently majoring in Computer Science at Purdue University and really looking forward to getting some technical experience in my field of study.  I'm currently open to working in a variety of fields including software, data management, and technical service.  If you would be interested in working with me, please don't hesitate to send me an email from the contact page.  I would be happy to hear about opportunities to work with you!</p>
-</div>
-
-<div class="phoneSize">
-    <div class="top-center">
-  <p style='font-size:18px; line-height: 1.5;color: E6B39A; margin:50px; padding: 300px 0px'> Hi, my name is Gabe!  I work at Chick-fil-A as a trainer in customer service and operations.  My managers trust me completely and love to have me around, but I’m currently majoring in Computer Science at Purdue University and really looking forward to getting some technical experience in my field of study.  I'm currently open to working in a variety of fields including software, data managment, and technical service.  If you would be interested in working with me, please don't hesitate to send me an email from the contact page.  I would be happy to hear about opportunities to work with you!</p>
-</div>
-</div>
-
-	<!--
-<p style='text-align:center;'> <video src='fresh-video-1.mp4' alt='man-waves' width='1500px' height='975px' loop autoplay
-	</p>
-	
-
-
-	<p style='font-size:100px'>	<em style='font-size:200px'>How awesome is that.</em>  My sister and I are excited to provide '
-digital animations independently.   For now we are mainly mimicking fun commercials.  
-Safe to say, we won't stop there.  Get ready!</p>
-
-	<p class=library-link style='font-size:250;text-align:center;font-family:old english text mt;color:a666d1;'><a style='color:a666d1' href='animation-library.html'>
-To The Library!</a></p>
-	
-<p></br></br></br></br></br>   If you would like to know more about the application we use to animate, please
-visit the <a href='https://www.blender.org/'>blender website</a>, or talk to me directly!</br>
-From one bro to another, thank you.</p>
-	-->
-
-
-
-   </body>
-
- </html>
+  </body>
+</html>
