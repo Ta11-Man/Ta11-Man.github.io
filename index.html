@@ -492,8 +492,8 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
           position: absolute;
           left: 0;
           top: 100vh;
-          width: 100vw;
-          max-width: none;
+          width: 95vw;
+          max-width: 99vw;
           max-height: none;
           margin: 3vh auto 5vh auto;
           padding: 0 2vw;
@@ -508,10 +508,13 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
         .project-sidebar {
           overflow-y: visible;
           padding: 0 2vw 2vh 2vw;
+          width: 90vw;
+          /* background-color: red; */
         }
 
         .project-bar {
-          padding: 1.5vh 3vw;
+          padding: 1.5vh 1.5vw;
+          width: 98%;
         }
 
         .project-title {
@@ -570,15 +573,27 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
         const maxPupilMove = 1.2; // in vh units
 
         function movePupils(e) {
-          const ran = Math.random();
+          const clientX = e.type.startsWith("touch")
+            ? e.touches[0].clientX
+            : e.clientX;
+          const clientY = e.type.startsWith("touch")
+            ? e.touches[0].clientY
+            : e.clientY;
+          if (
+            e.type.startsWith("touch") &&
+            !e.touches.length &&
+            e.type !== "touchend"
+          )
+            return;
+
           const screenQuarter =
             Math.max(window.innerWidth, window.innerHeight) * 0.8;
           eyes.forEach((eye, i) => {
             const rect = eye.getBoundingClientRect();
             const cx = rect.left + rect.width / 2;
             const cy = rect.top + rect.height / 2;
-            const dx = e.clientX - cx;
-            const dy = e.clientY - cy;
+            const dx = clientX - cx;
+            const dy = clientY - cy;
             const distFromEye = Math.hypot(dx, dy);
             const angle = Math.atan2(dy, dx);
             const maxMove = 1.5; // in vh
@@ -596,6 +611,8 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
         }
 
         document.addEventListener("mousemove", movePupils);
+        document.addEventListener("touchmove", movePupils, { passive: true });
+        document.addEventListener("touchstart", movePupils, { passive: true });
 
         let contractPupilsTimeout;
         function contractPupils() {
@@ -625,6 +642,9 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
         document.addEventListener("mousedown", contractPupils);
         document.addEventListener("mouseup", resetEyes);
         document.addEventListener("mouseleave", resetEyes);
+        document.addEventListener("touchstart", contractPupils);
+        document.addEventListener("touchend", resetEyes);
+        // document.addEventListener("touchcancel", resetEyes);
         setInterval(blink, 10000);
       </script>
     </div>
