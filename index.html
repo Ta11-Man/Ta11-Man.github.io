@@ -72,7 +72,7 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
       .ninja-wrapper {
         position: absolute;
         bottom: 2%;
-        right: min(30vh, 50vw);
+        right: 31vh;
         height: 32vh;
         width: auto;
         pointer-events: none;
@@ -116,12 +116,25 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
     <style>
       body {
         margin: 0;
-        overflow: hidden !important;
-        /* position: fixed; */
+        overflow-x: hidden;
+        overflow-y: hidden;
         width: 100vw;
         height: 100vh;
-        scroll-behavior: none;
         background-color: var(--bg-color);
+        /* Dot grid patters */
+        background-image: radial-gradient(
+          circle,
+          rgba(7, 255, 237, 0.15) 1px,
+          transparent 1px
+        );
+        background-image: radial-gradient(
+            circle,
+            rgba(7, 255, 237, 0.1) 1px,
+            transparent 1px
+          ),
+          radial-gradient(circle, rgba(7, 255, 237, 0.05) 1px, transparent 1px);
+        background-position: 0 0, 15px 0px;
+        background-size: 30px 30px;
         text-align: center;
       }
       img {
@@ -140,8 +153,6 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
       h1 {
         position: relative;
         font-family: var(--Hurmit);
-        /* font-style: italic; */
-        /* font-weight: bold; */
         filter: var(--glow);
         color: var(--teal-light);
         z-index: 10;
@@ -157,21 +168,363 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
         max-width: 50vh;
       }
 
+      /* Links */
+      a.github-link {
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        cursor: pointer;
+        display: block;
+      }
+      a.github-link img {
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
       @media (max-width: 60vh) {
         .pc {
           display: none;
         }
-        /* .ninja-wrapper {
+      }
+
+      /* Project Sidebar Styles */
+      .repos-section {
+        position: fixed;
+        left: 2vw;
+        top: 2vh;
+        width: 40vw;
+        max-height: calc(100vh - 4vh);
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .repos-label {
+        font-family: var(--Hurmit);
+        font-size: 3vh;
+        font-weight: bold;
+        color: var(--teal-light);
+        filter: var(--glow);
+        text-shadow: 0 0 15px rgba(7, 255, 237, 0.6);
+        margin-bottom: 2vh;
+        text-align: left;
+        padding-left: 1vw;
+        pointer-events: none;
+      }
+
+      .project-sidebar {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0 1vw 1vh 1vw;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5vh; /* Adjusted spacing */
+        scrollbar-width: thin;
+        scrollbar-color: rgba(7, 255, 237, 0.3) rgba(0, 109, 107, 0.1);
+      }
+
+      .project-sidebar::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .project-sidebar::-webkit-scrollbar-track {
+        background: rgba(0, 109, 107, 0.1);
+        border-radius: 10px;
+      }
+
+      .project-sidebar::-webkit-scrollbar-thumb {
+        background: rgba(7, 255, 237, 0.3);
+        border-radius: 10px;
+        transition: background 0.3s;
+      }
+
+      .project-sidebar::-webkit-scrollbar-thumb:hover {
+        background: rgba(7, 255, 237, 0.5);
+      }
+
+      .project-bar {
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 109, 107, 0.15),
+          rgba(0, 54, 50, 0.25)
+        );
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(7, 255, 237, 0.3);
+        border-radius: 12px;
+        padding: 2vh 2.5vw;
+        cursor: pointer;
+        pointer-events: auto;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3),
+          0 0 20px rgba(7, 255, 237, 0.1);
+        opacity: 0;
+        transform: translateY(150%);
+        animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        text-decoration: none;
+        display: block;
+      }
+
+      .project-bar::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(7, 255, 237, 0.1),
+          transparent
+        );
+        transition: left 0.6s;
+      }
+
+      .project-bar:hover::before {
+        left: 100;
+      }
+
+      .project-bar:hover {
+        transform: scale(1.03) translateX(-5px);
+        border-color: rgba(7, 255, 237, 0.6);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4),
+          0 0 30px rgba(7, 255, 237, 0.3);
+        background: linear-gradient(
+          135deg,
+          rgba(0, 109, 107, 0.25),
+          rgba(0, 54, 50, 0.35)
+        );
+      }
+
+      .project-bar:active {
+        transform: scale(0.98) translateX(-50px);
+      }
+
+      @keyframes slideUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .project-title {
+        font-family: var(--Hurmit);
+        font-size: 2.2vh;
+        font-weight: bold;
+        color: var(--teal-light);
+        margin: 0 0 1vh 0;
+        filter: var(--glow-tight);
+        text-shadow: 0 0 10px rgba(7, 255, 237, 0.5);
+      }
+
+      .project-languages {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8vh;
+      }
+
+      .language-tag {
+        font-family: var(--Hurmit-m);
+        font-size: 1.4vh;
+        padding: 0.5vh 1vh;
+        /* Improved contrast */
+        background: linear-gradient(
+          135deg,
+          rgba(7, 255, 237, 0.25),
+          rgba(0, 109, 107, 0.35)
+        );
+        border: 1px solid rgba(7, 255, 237, 0.5);
+        border-radius: 20px;
+        color: var(--teal-light); /* Brighter text */
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        text-shadow: 0 0 8px rgba(7, 255, 237, 0.4); /* Added glow */
+        filter: drop-shadow(0px 0px 4px rgba(7, 255, 237, 0.3));
+      }
+
+      /* GitHub Contribution Graph */
+      .commit-display {
+        position: absolute;
+        right: 40vh;
+        top: 50%;
+        transform: translate(-100%, -50%);
+        width: 20vwpx;
+        max-height: 80vh;
+        z-index: 50;
+        padding: 2vh 1.5vw;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 109, 107, 0.15),
+          rgba(0, 54, 50, 0.25)
+        );
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(7, 255, 237, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3),
+          0 0 20px rgba(7, 255, 237, 0.1);
+      }
+      .commit-title {
+        font-family: var(--Hurmit);
+        font-size: 2vh;
+        font-weight: bold;
+        color: var(--teal-light);
+        margin-bottom: 1.5vh;
+        text-align: center;
+        filter: var(--glow-tight);
+      }
+      .contribution-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(52, 1fr);
+        gap: 3px;
+      }
+      .contribution-cell {
+        aspect-ratio: 1;
+        border-radius: 2px;
+        background: rgba(0, 109, 107, 0.2);
+        border: 1px solid rgba(7, 255, 237, 0.1);
+        transition: all 0.3s;
+      }
+      .contribution-cell[data-level="0"] {
+        background: rgba(0, 54, 50, 0.3);
+      }
+      .contribution-cell[data-level="1"] {
+        background: rgba(7, 255, 237, 0.2);
+        border-color: rgba(7, 255, 237, 0.3);
+      }
+      .contribution-cell[data-level="2"] {
+        background: rgba(7, 255, 237, 0.4);
+        border-color: rgba(7, 255, 237, 0.5);
+        box-shadow: 0 0 5px rgba(7, 255, 237, 0.3);
+      }
+      .contribution-cell[data-level="3"] {
+        background: rgba(7, 255, 237, 0.6);
+        border-color: rgba(7, 255, 237, 0.7);
+        box-shadow: 0 0 8px rgba(7, 255, 237, 0.5);
+      }
+      .contribution-cell[data-level="4"] {
+        background: var(--teal-light);
+        border-color: var(--teal-light);
+        box-shadow: 0 0 12px rgba(7, 255, 237, 0.7);
+      }
+      .loading-text,
+      .error-text {
+        font-family: var(--Hurmit-m);
+        font-size: 1.4vh;
+        text-align: center;
+        padding: 2vh 0;
+        color: var(--teal-med);
+      }
+      .error-text {
+        color: rgba(255, 100, 100, 0.8);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 150vh) {
+        .repos-section {
+          width: 35vw;
+        }
+        .commit-display {
+          display: none; /* Hide if overlaps */
+        }
+      }
+
+      @media (max-width: 100vh) {
+        body {
+          overflow-y: auto; /* Enable scroll */
+          min-height: 100vh;
+          height: auto;
+        }
+        h1 {
+          font-size: min(15vw, 10vh);
+          margin-top: 1vh;
+          margin-bottom: min(30vh, 100vw);
+        }
+        p {
+          font-size: min(3.2vh, 4.3vw);
+          margin: 5vw; /* Provides 5vw spacing on all sides */
+          width: auto; /* Allow width to adjust based on margins */
+          text-align: center;
+        }
+
+        /* 1. Profile Picture - Centered at top */
+        .profile-pic-container {
           position: absolute;
-          bottom: 2%;
-          right: 0vw;
-          background-color: var(--testing);
-          margin: 0;
-          height: 32vh;
-          width: auto;
-          pointer-events: none;
+          display: block;
+          left: 50%;
           transform: translateX(-50%);
-        } */
+          width: 60vw !important;
+          max-width: 300px !important;
+        }
+        .profile-pic-container img {
+          position: absolute;
+          width: 100vw;
+          max-width: none;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        /* 2. Title Text - Below Picture */
+        .title-container {
+          position: absolute;
+          left: 50%;
+          top: 60vw;
+          transform: translateX(-50%);
+          width: 90vw;
+        }
+
+        /* 3. Ninja - Below Title */
+
+        .ninja-wrapper {
+          position: absolute;
+          right: 50vw;
+          transform: translateX(50%);
+          display: block;
+        }
+
+        /* 4. Project Bars - Below Ninja */
+        .repos-section {
+          position: absolute;
+          left: 0;
+          top: 100vh;
+          width: 100vw;
+          max-width: none;
+          max-height: none;
+          margin: 3vh auto 5vh auto;
+          padding: 0 2vw;
+        }
+
+        .repos-label {
+          font-size: 2.5vh;
+          text-align: center;
+          padding-left: 0;
+        }
+
+        .project-sidebar {
+          overflow-y: visible;
+          padding: 0 2vw 2vh 2vw;
+        }
+
+        .project-bar {
+          padding: 1.5vh 3vw;
+        }
+
+        .project-title {
+          font-size: 2vh;
+        }
+
+        .language-tag {
+          font-size: 1.2vh;
+        }
+
+        .commit-display {
+          display: none;
+        }
       }
     </style>
   </head>
@@ -190,20 +543,27 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
         transition: scale 0.5s cubic-bezier(0, 2, 0.6, 1);
       "
     >
-      <div class="ninja-wrapper pc-ninja">
-        <img
-          id="ninja"
-          src="ninja-essence-noeye.svg"
-          alt="Ninja"
-          loading="eager"
-          fetchpriority="high"
-          style="display: block; width: auto; height: 35vh"
-        />
-        <div class="eyes-container">
-          <div class="eye left"><div class="pupil"></div></div>
-          <div class="eye right"><div class="pupil"></div></div>
+      <a
+        href="https://gabe.halste.ad"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="github-link"
+      >
+        <div class="ninja-wrapper">
+          <img
+            id="ninja"
+            src="ninja-essence-noeye.svg"
+            alt="Ninja"
+            loading="eager"
+            fetchpriority="high"
+            style="display: block; width: auto; height: 35vh"
+          />
+          <div class="eyes-container">
+            <div class="eye left"><div class="pupil"></div></div>
+            <div class="eye right"><div class="pupil"></div></div>
+          </div>
         </div>
-      </div>
+      </a>
       <script>
         const eyes = document.querySelectorAll(".eye");
         const pupils = document.querySelectorAll(".pupil");
@@ -282,20 +642,28 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
         background-color: red;
       "
     ></div>
-    <img
-      src="https://avatars.githubusercontent.com/u/143021084"
-      alt="Github profile picture"
-      style="
-        position: absolute;
-        width: 100vw;
-        border-radius: 50%;
-        top: 0;
-        right: 0;
-        max-width: 60vh;
-        z-index: 1;
-      "
-    />
+    <a
+      href="https://github.com/Ta11-Man"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github-link profile-pic-container"
+    >
+      <img
+        src="https://avatars.githubusercontent.com/u/143021084"
+        alt="Github profile picture"
+        style="
+          position: absolute;
+          width: 100vw;
+          border-radius: 50%;
+          top: 0;
+          right: 0;
+          max-width: 60vh;
+          z-index: 1;
+        "
+      />
+    </a>
     <div
+      class="title-container"
       style="
         position: absolute;
         width: 100vw;
@@ -309,5 +677,202 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
       <h1>Ta11-Man</h1>
       <p>Gabriel Halstead, Github extraordinaire.</p>
     </div>
+
+    <!-- Project Sidebar -->
+    <div class="repos-section">
+      <div class="repos-label">Repos</div>
+      <div class="project-sidebar" id="projectSidebar"></div>
+    </div>
+
+    <!-- GitHub Contribution Display -->
+    <div class="commit-display" id="commitDisplay">
+      <div class="commit-title">GitHub Activity</div>
+      <div class="contribution-grid" id="contributionGrid">
+        <div class="loading-text">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Project Loader Script -->
+    <script>
+      // Load projects from data.json and create sidebar bars
+      async function loadProjects() {
+        try {
+          const response = await fetch("data.json");
+          const projects = await response.json();
+
+          // Sort by priority (ascending - lower numbers first)
+          projects.sort((a, b) => a.priority - b.priority);
+
+          const sidebar = document.getElementById("projectSidebar");
+
+          projects.forEach((project, index) => {
+            // Create project bar link
+            const bar = document.createElement("a");
+            bar.className = "project-bar";
+            bar.href = project.link;
+            bar.target = "_blank";
+            bar.rel = "noopener noreferrer";
+            bar.style.animationDelay = `${index * 0.15}s`;
+
+            // Create title
+            const title = document.createElement("div");
+            title.className = "project-title";
+            title.textContent = project.name;
+
+            // Create languages container
+            const languagesContainer = document.createElement("div");
+            languagesContainer.className = "project-languages";
+
+            // Add language tags
+            project.languages.forEach((lang) => {
+              const tag = document.createElement("span");
+              tag.className = "language-tag";
+              tag.textContent = lang;
+              languagesContainer.appendChild(tag);
+            });
+
+            // Assemble the bar
+            bar.appendChild(title);
+            bar.appendChild(languagesContainer);
+            sidebar.appendChild(bar);
+          });
+        } catch (error) {
+          console.error("Error loading projects:", error);
+        }
+      }
+
+      // Load projects when DOM is ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", loadProjects);
+      } else {
+        loadProjects();
+      }
+    </script>
+
+    <!-- GitHub Contribution Graph Script -->
+    <script>
+      // Fetch and display GitHub contribution graph
+      async function loadGitHubActivity() {
+        const grid = document.getElementById("contributionGrid");
+        const username = "Ta11-Man";
+        const cacheKey = "github_activity_cache";
+        const cacheTimeout = 10 * 60 * 1000; // 10 minutes
+
+        try {
+          // Check cache
+          const cached = localStorage.getItem(cacheKey);
+          if (cached) {
+            const { data, timestamp } = JSON.parse(cached);
+            if (Date.now() - timestamp < cacheTimeout) {
+              renderContributionGraph(data);
+              return;
+            }
+          }
+
+          // Fetch from GitHub API
+          const response = await fetch(
+            `https://api.github.com/users/${username}/events?per_page=100`
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch GitHub data");
+          }
+
+          const events = await response.json();
+
+          // Filter push events and aggregate by date
+          const commitsByDate = {};
+          const now = new Date();
+          const twentyeightWeeksAgo = new Date(
+            now - 28 * 7 * 24 * 60 * 60 * 1000
+          );
+
+          events
+            .filter((event) => event.type === "PushEvent")
+            .forEach((event) => {
+              const date = new Date(event.created_at);
+              if (date >= twentyeightWeeksAgo) {
+                const dateStr = date.toISOString().split("T")[0];
+                const commits = event.payload.commits
+                  ? event.payload.commits.length
+                  : 1;
+                commitsByDate[dateStr] =
+                  (commitsByDate[dateStr] || 0) + commits;
+              }
+            });
+
+          // Cache the data
+          localStorage.setItem(
+            cacheKey,
+            JSON.stringify({
+              data: commitsByDate,
+              timestamp: Date.now(),
+            })
+          );
+
+          renderContributionGraph(commitsByDate);
+        } catch (error) {
+          console.error("Error loading GitHub activity:", error);
+          grid.innerHTML =
+            '<div class="error-text">Unable to load activity</div>';
+        }
+      }
+
+      function renderContributionGraph(commitsByDate) {
+        const grid = document.getElementById("contributionGrid");
+        grid.innerHTML = "";
+
+        // Create 196 cells (28 weeks × 7 days)
+        const now = new Date();
+        const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; // For consistent ordering
+        const cells = Array(7)
+          .fill(null)
+          .map(() => Array(28).fill(null));
+
+        for (let week = 0; week < 28; week++) {
+          for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+            // Calculate the date for the current cell (week, dayOfWeek)
+            // Start from today and go back in time
+            const dateOffset = week * 7 + (6 - dayOfWeek); // Adjust for reversing order if needed, assuming cells are rendered top-to-bottom, left-to-right
+            const date = new Date(now - dateOffset * 24 * 60 * 60 * 1000);
+            const dateStr = date.toISOString().split("T")[0];
+            const commits = commitsByDate[dateStr] || 0;
+
+            const cell = document.createElement("div");
+            cell.className = "contribution-cell";
+
+            // Determine level (0-4) based on commit count
+            let level = 0;
+            if (commits > 0) level = 1;
+            if (commits >= 3) level = 2;
+            if (commits >= 6) level = 3;
+            if (commits >= 10) level = 4;
+
+            cell.setAttribute("data-level", level);
+            cell.title = `${dateStr}: ${commits} commit${
+              commits !== 1 ? "s" : ""
+            }`;
+
+            // Store cell in a 2D array to arrange correctly later
+            cells[dayOfWeek][27 - week] = cell; // Store cells to render from right to left (most recent week on right)
+          }
+        }
+
+        // Append cells to grid in the desired order (row by row, then column by column)
+        // This will create a grid with 7 columns (days) and 28 rows (weeks)
+        for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+          for (let week = 0; week < 28; week++) {
+            grid.appendChild(cells[dayOfWeek][week]);
+          }
+        }
+      }
+
+      // Load when DOM is ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", loadGitHubActivity);
+      } else {
+        loadGitHubActivity();
+      }
+    </script>
   </body>
 </html>

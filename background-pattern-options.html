@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background Pattern Options</title>
+    <style>
+      :root {
+        --github-med: #0d1117;
+        --teal-light: #07ffedff;
+        --teal-med: #006d6bff;
+        --teal-dark: #003632ff;
+      }
+
+      body {
+        margin: 0;
+        padding: 20px;
+        background: var(--github-med);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--teal-light);
+        margin-bottom: 40px;
+      }
+
+      .pattern-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 30px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .pattern-card {
+        background: #1a1f2e;
+        border: 2px solid rgba(7, 255, 237, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .pattern-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(7, 255, 237, 0.2);
+      }
+
+      .pattern-preview {
+        width: 100%;
+        height: 250px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        border: 1px solid rgba(7, 255, 237, 0.2);
+      }
+
+      .pattern-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: var(--teal-light);
+        margin-bottom: 10px;
+      }
+
+      .pattern-description {
+        font-size: 14px;
+        color: #aaa;
+        margin-bottom: 15px;
+      }
+
+      .code-snippet {
+        background: #0a0e14;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        color: #7dd3fc;
+        overflow-x: auto;
+        white-space: pre;
+        border: 1px solid rgba(7, 255, 237, 0.1);
+      }
+
+      /* Pattern 1: Dot Grid */
+      .pattern-1 {
+        background-color: var(--github-med);
+        background-image: radial-gradient(
+          circle,
+          rgba(7, 255, 237, 0.15) 1px,
+          transparent 1px
+        );
+        background-size: 30px 30px;
+      }
+
+      /* Pattern 2: Grid Lines */
+      .pattern-2 {
+        background-color: var(--github-med);
+        background-image: linear-gradient(
+            rgba(7, 255, 237, 0.1) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(7, 255, 237, 0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+      }
+
+      /* Pattern 3: Diagonal Lines */
+      .pattern-3 {
+        background-color: var(--github-med);
+        background-image: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 35px,
+          rgba(7, 255, 237, 0.08) 35px,
+          rgba(7, 255, 237, 0.08) 70px
+        );
+      }
+
+      /* Pattern 4: Hexagons */
+      .pattern-4 {
+        background-color: var(--github-med);
+        background-image: linear-gradient(
+            30deg,
+            rgba(7, 255, 237, 0.08) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            rgba(7, 255, 237, 0.08) 87.5%,
+            rgba(7, 255, 237, 0.08)
+          ),
+          linear-gradient(
+            150deg,
+            rgba(7, 255, 237, 0.08) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            rgba(7, 255, 237, 0.08) 87.5%,
+            rgba(7, 255, 237, 0.08)
+          ),
+          linear-gradient(
+            30deg,
+            rgba(7, 255, 237, 0.08) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            rgba(7, 255, 237, 0.08) 87.5%,
+            rgba(7, 255, 237, 0.08)
+          ),
+          linear-gradient(
+            150deg,
+            rgba(7, 255, 237, 0.08) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            rgba(7, 255, 237, 0.08) 87.5%,
+            rgba(7, 255, 237, 0.08)
+          ),
+          linear-gradient(
+            60deg,
+            rgba(7, 255, 237, 0.05) 25%,
+            transparent 25.5%,
+            transparent 75%,
+            rgba(7, 255, 237, 0.05) 75%,
+            rgba(7, 255, 237, 0.05)
+          ),
+          linear-gradient(
+            60deg,
+            rgba(7, 255, 237, 0.05) 25%,
+            transparent 25.5%,
+            transparent 75%,
+            rgba(7, 255, 237, 0.05) 75%,
+            rgba(7, 255, 237, 0.05)
+          );
+        background-size: 80px 140px;
+        background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+      }
+
+      /* Pattern 5: Circuit Board */
+      .pattern-5 {
+        background-color: var(--github-med);
+        background-image: linear-gradient(
+            rgba(7, 255, 237, 0.05) 2px,
+            transparent 2px
+          ),
+          linear-gradient(90deg, rgba(7, 255, 237, 0.05) 2px, transparent 2px),
+          linear-gradient(rgba(7, 255, 237, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(7, 255, 237, 0.03) 1px, transparent 1px);
+        background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+        background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+      }
+
+      /* Pattern 6: Subtle Noise */
+      .pattern-6 {
+        background-color: var(--github-med);
+        background-image: radial-gradient(
+            circle at 20% 50%,
+            rgba(7, 255, 237, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(0, 109, 107, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 20%,
+            rgba(7, 255, 237, 0.03) 0%,
+            transparent 50%
+          );
+      }
+
+      /* Pattern 7: Glowing Dots */
+      .pattern-7 {
+        background-color: var(--github-med);
+        background-image: radial-gradient(
+            circle,
+            rgba(7, 255, 237, 0.2) 2px,
+            transparent 2px
+          ),
+          radial-gradient(circle, rgba(7, 255, 237, 0.1) 1px, transparent 1px);
+        background-size: 80px 80px, 40px 40px;
+        background-position: 0 0, 40px 40px;
+      }
+
+      /* Pattern 8: Carbon Fiber */
+      .pattern-8 {
+        background: radial-gradient(
+            circle at 100% 150%,
+            var(--github-med) 24%,
+            rgba(7, 255, 237, 0.05) 25%,
+            rgba(7, 255, 237, 0.05) 28%,
+            var(--github-med) 29%,
+            var(--github-med) 36%,
+            rgba(7, 255, 237, 0.05) 36%,
+            rgba(7, 255, 237, 0.05) 40%,
+            transparent 40%,
+            transparent
+          ),
+          radial-gradient(
+            circle at 0 150%,
+            var(--github-med) 24%,
+            rgba(7, 255, 237, 0.05) 25%,
+            rgba(7, 255, 237, 0.05) 28%,
+            var(--github-med) 29%,
+            var(--github-med) 36%,
+            rgba(7, 255, 237, 0.05) 36%,
+            rgba(7, 255, 237, 0.05) 40%,
+            transparent 40%,
+            transparent
+          ),
+          radial-gradient(
+            circle at 50% 100%,
+            rgba(7, 255, 237, 0.08) 10%,
+            rgba(7, 255, 237, 0.05) 11%,
+            rgba(7, 255, 237, 0.05) 23%,
+            rgba(7, 255, 237, 0.08) 24%,
+            rgba(7, 255, 237, 0.08) 30%
+          ),
+          radial-gradient(
+            circle at 100% 50%,
+            rgba(7, 255, 237, 0.08) 5%,
+            rgba(7, 255, 237, 0.05) 6%,
+            rgba(7, 255, 237, 0.05) 15%,
+            rgba(7, 255, 237, 0.08) 16%,
+            rgba(7, 255, 237, 0.08) 20%
+          ),
+          radial-gradient(
+            circle at 0 50%,
+            rgba(7, 255, 237, 0.08) 5%,
+            rgba(7, 255, 237, 0.05) 6%,
+            rgba(7, 255, 237, 0.05) 15%,
+            rgba(7, 255, 237, 0.08) 16%,
+            rgba(7, 255, 237, 0.08) 20%
+          ),
+          radial-gradient(
+            circle at 50% 0,
+            rgba(7, 255, 237, 0.08) 10%,
+            rgba(7, 255, 237, 0.05) 11%,
+            rgba(7, 255, 237, 0.05) 23%,
+            rgba(7, 255, 237, 0.08) 24%,
+            rgba(7, 255, 237, 0.08) 30%
+          ),
+          var(--github-med);
+        background-size: 100px 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Background Pattern Options for Your GitHub Page</h1>
+
+    <div class="pattern-grid">
+      <!-- Pattern 1 -->
+      <div class="pattern-card">
+        <div class="pattern-preview pattern-1"></div>
+        <div class="pattern-title">1. Dot Grid (Subtle)</div>
+        <div class="pattern-description">
+          Clean and minimal dot pattern. Great for a professional look without
+          being distracting.
+        </div>
+        <div class="code-snippet">
+          background-image: radial-gradient( circle, rgba(7, 255, 237, 0.15)
+          1px, transparent 1px ); background-size: 30px 30px;
+        </div>
+      </div>
+
+      <!-- Pattern 2 -->
+      <div class="pattern-card">
+        <div class="pattern-preview pattern-2"></div>
+        <div class="pattern-title">2. Grid Lines</div>
+        <div class="pattern-description">
+          Classic grid pattern. Very clean and organized, like graph paper.
+        </div>
+        <div class="code-snippet">
+          background-image: linear-gradient( rgba(7, 255, 237, 0.1) 1px,
+          transparent 1px ), linear-gradient(90deg, rgba(7, 255, 237, 0.1) 1px,
+          transparent 1px ); background-size: 50px 50px;
+        </div>
+      </div>
+
+      <!-- Pattern 3 -->
+      <div class="pattern-card">
+        <div class="pattern-preview pattern-3"></div>
+        <div class="pattern-title">3. Diagonal Stripes</div>
+        <div class="pattern-description">
+          Adds a sense of movement and energy. Modern and dynamic feel.
+        </div>
+        <div class="code-snippet">
+          background-image: repeating-linear-gradient( 45deg, transparent,
+          transparent 35px, rgba(7, 255, 237, 0.08) 35px, rgba(7, 255, 237,
+          0.08) 70px );
+        </div>
+      </div>
+
+      <!-- Pattern 4 -->
+      <div class="pattern-card">
+        <div class="pattern-preview pattern-4"></div>
+        <div class="pattern-title">4. Hexagon Pattern</div>
+        <div class="pattern-description">
+          Tech-inspired honeycomb design. Perfect for a coding/tech portfolio.
+        </div>
+        <div class="code-snippet">
+          /* Complex hexagon pattern */ /* See full code in this file */
+        </div>
+      </div>
+
+      <!-- Pattern 5 -->
+      <div class="pattern-card">
+        <div class="pattern-preview pattern-5"></div>
+        <div class="pattern-title">5. Circuit Board</div>
+        <div class="pattern-description">
+          Double grid pattern resembling a circuit board. Great for tech themes.
+        </div>
+        <div class="code-snippet">
+          background-image: linear-gradient( rgba(7, 255, 237, 0.05) 2px,
+          transparent 2px ), linear-gradient(90deg, rgba(7, 255, 237, 0.05) 2px,
+          transparent 2px );
+        </div>
+      </div>
+
+      <!-- Pattern 6 -->
+      <div class="pattern-card">
+        <div class="pattern-preview pattern-6"></div>
+        <div class="pattern-title">6. Subtle Gradient Orbs</div>
+        <div class="pattern-description">
+          Very subtle radial gradients. Adds depth without being obvious.
+        </div>
+        <div class="code-snippet">
+          background-image: radial-gradient(circle at 20% 50%, rgba(7, 255, 237,
+          0.05) 0%, transparent 50% ), radial-gradient(circle at 80% 80%,
+          rgba(0, 109, 107, 0.05) 0%, transparent 50% );
+        </div>
+      </div>
+
+      <!-- Pattern 7 -->
+      <div class="pattern-card">
+        <div class="pattern-preview pattern-7"></div>
+        <div class="pattern-title">7. Glowing Dots</div>
+        <div class="pattern-description">
+          Layered dots pattern with varying opacity. Creates a "starfield"
+          effect.
+        </div>
+        <div class="code-snippet">
+          background-image: radial-gradient(circle, rgba(7, 255, 237, 0.2) 2px,
+          transparent 2px ), radial-gradient(circle, rgba(7, 255, 237, 0.1) 1px,
+          transparent 1px ); background-size: 80px 80px, 40px 40px;
+          background-position: 0 0, 40px 40px;
+        </div>
+      </div>
+
+      <!-- Pattern 8 -->
+      <div class="pattern-card">
+        <div class="pattern-preview pattern-8"></div>
+        <div class="pattern-title">8. Carbon Fiber</div>
+        <div class="pattern-description">
+          Premium carbon fiber texture. Very sophisticated and modern.
+        </div>
+        <div class="code-snippet">
+          /* Complex carbon fiber pattern */ /* See full code in this file */
+        </div>
+      </div>
+    </div>
+
+    <div
+      style="
+        margin-top: 50px;
+        padding: 30px;
+        background: rgba(7, 255, 237, 0.1);
+        border-radius: 12px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+      "
+    >
+      <h2 style="color: var(--teal-light); margin-top: 0">How to Apply</h2>
+      <p>
+        To add any of these patterns to your page, simply add the background CSS
+        to your body style. For example:
+      </p>
+      <div class="code-snippet">
+        body { margin: 0; overflow-x: hidden; overflow-y: auto; width: 100vw;
+        min-height: 100vh; scroll-behavior: smooth; background-color:
+        var(--bg-color); /* Add pattern here: */ background-image:
+        radial-gradient( circle, rgba(7, 255, 237, 0.15) 1px, transparent 1px );
+        background-size: 30px 30px; text-align: center; }
+      </div>
+      <p style="margin-bottom: 0">
+        <strong>Recommendation:</strong> I suggest starting with Pattern 1 (Dot
+        Grid) or Pattern 2 (Grid Lines) as they're subtle and professional.
+        Pattern 5 (Circuit Board) is great if you want a more tech-focused
+        aesthetic.
+      </p>
+    </div>
+  </body>
+</html>
