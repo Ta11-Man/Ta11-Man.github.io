@@ -9,10 +9,18 @@
       property="og:description"
       content="Visual front for Gabe Halstead's Github, Computer Science Student and System Developer."
     />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:updated_time" content="2025-11-30" />
+
     <meta property="og:image" content="ninja-essence-head" />
     <meta property="og:url" content="https://Ta11-Man.github.io" />
 
-    <link rel="icon" href="ninja-essence-head.svg" type="image/svg" />
+    <link
+      rel="icon"
+      href="assets/ninja-essence-head.svg"
+      type="image/svg+xml"
+    />
 
     <style>
       /*
@@ -347,15 +355,29 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
       }
 
       /* GitHub Contribution Graph */
-      .commit-display {
+      .activity-container {
         position: absolute;
-        right: 40vh;
+        right: 65vh;
         top: 50%;
-        transform: translate(-100%, -50%);
-        width: 20vwpx;
-        max-height: 80vh;
+        transform: translate(0, -50%); /* Align right edge */
         z-index: 50;
-        padding: 2vh 1.5vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        pointer-events: none; /* Let clicks pass through container */
+      }
+
+      .years-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 1vw;
+        pointer-events: auto; /* Re-enable clicks on grids */
+      }
+
+      .year-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         background: linear-gradient(
           135deg,
           rgba(0, 109, 107, 0.15),
@@ -365,9 +387,11 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
         -webkit-backdrop-filter: blur(10px);
         border: 1px solid rgba(7, 255, 237, 0.3);
         border-radius: 12px;
+        padding: 1vh 0.5vw;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3),
           0 0 20px rgba(7, 255, 237, 0.1);
       }
+
       .commit-title {
         font-family: var(--Hurmit);
         font-size: 2vh;
@@ -376,16 +400,35 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
         margin-bottom: 1.5vh;
         text-align: center;
         filter: var(--glow-tight);
+        text-shadow: 0 0 10px rgba(7, 255, 237, 0.5);
+        background: rgba(0, 54, 50, 0.5);
+        padding: 0.5vh 1vw;
+        border-radius: 8px;
+        border: 1px solid rgba(7, 255, 237, 0.2);
+        pointer-events: auto;
       }
+
+      .year-label {
+        font-family: var(--Hurmit-m);
+        font-size: 1.5vh;
+        color: var(--teal-med);
+        margin-bottom: 0.5vh;
+        font-weight: bold;
+      }
+
       .contribution-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        grid-template-rows: repeat(52, 1fr);
-        gap: 3px;
+        grid-template-rows: repeat(53, 1fr); /* Up to 53 weeks */
+        gap: 2px;
       }
+
       .contribution-cell {
-        aspect-ratio: 1;
-        border-radius: 2px;
+        width: 0.8vh;
+        height: 0.8vh;
+        min-width: 1px;
+        min-height: 1px;
+        border-radius: 1px;
         background: rgba(0, 109, 107, 0.2);
         border: 1px solid rgba(7, 255, 237, 0.1);
         transition: all 0.3s;
@@ -426,10 +469,22 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
 
       /* Responsive Design */
       @media (max-width: 150vh) {
-        .repos-section {
-          width: 35vw;
+        .activity-container {
+          display: none; /* Hide if overlaps */
         }
-        .commit-display {
+      }
+      @media (max-width: 150vh) {
+        .year-column1 {
+          display: none; /* Hide if overlaps */
+        }
+      }
+      @media (max-width: 175vh) {
+        .year-column2 {
+          display: none; /* Hide if overlaps */
+        }
+      }
+      @media (max-width: 200vh) {
+        .year-column3 {
           display: none; /* Hide if overlaps */
         }
       }
@@ -525,7 +580,7 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
           font-size: 1.2vh;
         }
 
-        .commit-display {
+        .activity-container {
           display: none;
         }
       }
@@ -534,28 +589,28 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
   <body>
     <!-- Loading Overlay -->
 
-    <div
-      id="decoration"
-      style="
-        position: absolute;
-        top: 0;
-        left: 0;
-        scale: 1;
-        width: 100%;
-        height: 100%;
-        transition: scale 0.5s cubic-bezier(0, 2, 0.6, 1);
-      "
+    <a
+      href="https://gabe.halste.ad"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github-link"
     >
-      <a
-        href="https://gabe.halste.ad"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="github-link"
+      <div
+        id="decoration"
+        style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          scale: 1;
+          width: 100%;
+          height: 100%;
+          transition: scale 0.5s cubic-bezier(0, 2, 0.6, 1);
+        "
       >
         <div class="ninja-wrapper">
           <img
             id="ninja"
-            src="ninja-essence-noeye.svg"
+            src="assets/ninja-essence-noeye.svg"
             alt="Ninja"
             loading="eager"
             fetchpriority="high"
@@ -566,102 +621,91 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
             <div class="eye right"><div class="pupil"></div></div>
           </div>
         </div>
-      </a>
-      <script>
-        const eyes = document.querySelectorAll(".eye");
-        const pupils = document.querySelectorAll(".pupil");
-        const maxPupilMove = 1.2; // in vh units
+        <script>
+          const eyes = document.querySelectorAll(".eye");
+          const pupils = document.querySelectorAll(".pupil");
+          const maxPupilMove = 1.2; // in vh units
 
-        function movePupils(e) {
-          const clientX = e.type.startsWith("touch")
-            ? e.touches[0].clientX
-            : e.clientX;
-          const clientY = e.type.startsWith("touch")
-            ? e.touches[0].clientY
-            : e.clientY;
-          if (
-            e.type.startsWith("touch") &&
-            !e.touches.length &&
-            e.type !== "touchend"
-          )
-            return;
+          function movePupils(e) {
+            const clientX = e.type.startsWith("touch")
+              ? e.touches[0].clientX
+              : e.clientX;
+            const clientY = e.type.startsWith("touch")
+              ? e.touches[0].clientY
+              : e.clientY;
+            if (
+              e.type.startsWith("touch") &&
+              !e.touches.length &&
+              e.type !== "touchend"
+            )
+              return;
 
-          const screenQuarter =
-            Math.max(window.innerWidth, window.innerHeight) * 0.8;
-          eyes.forEach((eye, i) => {
-            const rect = eye.getBoundingClientRect();
-            const cx = rect.left + rect.width / 2;
-            const cy = rect.top + rect.height / 2;
-            const dx = clientX - cx;
-            const dy = clientY - cy;
-            const distFromEye = Math.hypot(dx, dy);
-            const angle = Math.atan2(dy, dx);
-            const maxMove = 1.5; // in vh
-            let dist = 0;
-            if (distFromEye < screenQuarter) {
-              // Only move for the portion beyond the threshold
-              const excess = distFromEye - screenQuarter;
-              // scale excess to maxMove at 1/4 screen further
-              dist = 2; // Math.min(maxMove, (excess / screenQuarter) * maxMove);
-            }
-            const pupil = pupils[i];
-            pupil.style.left = 1 + Math.cos(angle) * dist + "vh";
-            pupil.style.top = 1 + Math.sin(angle) * dist + "vh";
-          });
-        }
+            const screenQuarter =
+              Math.max(window.innerWidth, window.innerHeight) * 0.8;
+            eyes.forEach((eye, i) => {
+              const rect = eye.getBoundingClientRect();
+              const cx = rect.left + rect.width / 2;
+              const cy = rect.top + rect.height / 2;
+              const dx = clientX - cx;
+              const dy = clientY - cy;
+              const distFromEye = Math.hypot(dx, dy);
+              const angle = Math.atan2(dy, dx);
+              const maxMove = 1.5; // in vh
+              let dist = 0;
+              if (distFromEye < screenQuarter) {
+                // Only move for the portion beyond the threshold
+                const excess = distFromEye - screenQuarter;
+                // scale excess to maxMove at 1/4 screen further
+                dist = 2; // Math.min(maxMove, (excess / screenQuarter) * maxMove);
+              }
+              const pupil = pupils[i];
+              pupil.style.left = 1 + Math.cos(angle) * dist + "vh";
+              pupil.style.top = 1 + Math.sin(angle) * dist + "vh";
+            });
+          }
 
-        document.addEventListener("mousemove", movePupils);
-        document.addEventListener("touchmove", movePupils, { passive: true });
-        document.addEventListener("touchstart", movePupils, { passive: true });
+          document.addEventListener("mousemove", movePupils);
+          document.addEventListener("touchmove", movePupils, { passive: true });
+          document.addEventListener("touchstart", movePupils, {
+            passive: true,
+          });
 
-        let contractPupilsTimeout;
-        function contractPupils() {
-          pupils.forEach((pupil) => {
-            pupil.style.transform = "scale(0.5)";
-          });
-          clearTimeout(contractPupilsTimeout);
-        }
-        function resetEyes() {
-          pupils.forEach((pupil) => {
-            pupil.style.transform = "";
-            pupil.style.left = "0.8vh";
-            pupil.style.top = "0.8vh";
-          });
-        }
-        function openEyes() {
-          pupils.forEach((pupil) => {
-            pupil.style.transform = "scaleY(1)";
-          });
-        }
-        function blink() {
-          pupils.forEach((pupil) => {
-            pupil.style.transform = "scaleY(0.2)";
-            setTimeout(openEyes, 300);
-          });
-        }
-        document.addEventListener("mousedown", contractPupils);
-        document.addEventListener("mouseup", resetEyes);
-        document.addEventListener("mouseleave", resetEyes);
-        document.addEventListener("touchstart", contractPupils);
-        document.addEventListener("touchend", resetEyes);
-        // document.addEventListener("touchcancel", resetEyes);
-        setInterval(blink, 10000);
-      </script>
-    </div>
-
+          let contractPupilsTimeout;
+          function contractPupils() {
+            pupils.forEach((pupil) => {
+              pupil.style.transform = "scale(0.5)";
+            });
+            clearTimeout(contractPupilsTimeout);
+          }
+          function resetEyes() {
+            pupils.forEach((pupil) => {
+              pupil.style.transform = "";
+              pupil.style.left = "0.8vh";
+              pupil.style.top = "0.8vh";
+            });
+          }
+          function openEyes() {
+            pupils.forEach((pupil) => {
+              pupil.style.transform = "scaleY(1)";
+            });
+          }
+          function blink() {
+            pupils.forEach((pupil) => {
+              pupil.style.transform = "scaleY(0.2)";
+              setTimeout(openEyes, 300);
+            });
+          }
+          document.addEventListener("mousedown", contractPupils);
+          document.addEventListener("mouseup", resetEyes);
+          document.addEventListener("mouseleave", resetEyes);
+          document.addEventListener("touchstart", contractPupils);
+          document.addEventListener("touchend", resetEyes);
+          // document.addEventListener("touchcancel", resetEyes);
+          setInterval(blink, 10000);
+        </script>
+      </div>
+    </a>
     <!-- content sections -->
-    <div
-      style="
-        position: absolute;
-        width: 100vw;
-        border-radius: 50%;
-        top: 0;
-        right: 0;
-        max-width: 50vh;
-        z-index: 20;
-        background-color: red;
-      "
-    ></div>
     <a
       href="https://github.com/Ta11-Man"
       target="_blank"
@@ -681,22 +725,22 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
           z-index: 1;
         "
       />
+      <div
+        class="title-container"
+        style="
+          position: absolute;
+          width: 100vw;
+          border-radius: 50%;
+          top: 0;
+          right: 0;
+          max-width: 60vh;
+          z-index: 1;
+        "
+      >
+        <h1>Ta11-Man</h1>
+        <p>Gabriel Halstead, Github extraordinaire.</p>
+      </div>
     </a>
-    <div
-      class="title-container"
-      style="
-        position: absolute;
-        width: 100vw;
-        border-radius: 50%;
-        top: 0;
-        right: 0;
-        max-width: 60vh;
-        z-index: 1;
-      "
-    >
-      <h1>Ta11-Man</h1>
-      <p>Gabriel Halstead, Github extraordinaire.</p>
-    </div>
 
     <!-- Project Sidebar -->
     <div class="repos-section">
@@ -705,19 +749,42 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
     </div>
 
     <!-- GitHub Contribution Display -->
-    <div class="commit-display" id="commitDisplay">
+    <div class="activity-container" id="activityContainer">
       <div class="commit-title">GitHub Activity</div>
-      <div class="contribution-grid" id="contributionGrid">
-        <div class="loading-text">Loading...</div>
+      <div class="years-wrapper">
+        <div class="year-column year-column3">
+          <div class="year-label">2023</div>
+          <div class="contribution-grid" id="grid-2023">
+            <div class="loading-text">...</div>
+          </div>
+        </div>
+        <div class="year-column year-column2">
+          <div class="year-label">2024</div>
+          <div class="contribution-grid" id="grid-2024">
+            <div class="loading-text">...</div>
+          </div>
+        </div>
+        <div class="year-column">
+          <div class="year-label">2025</div>
+          <div class="contribution-grid" id="grid-2025">
+            <div class="loading-text">...</div>
+          </div>
+        </div>
+        <div class="year-column year-column1">
+          <div class="year-label">2026</div>
+          <div class="contribution-grid" id="grid-2026">
+            <div class="loading-text">...</div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Project Loader Script -->
     <script>
-      // Load projects from data.json and create sidebar bars
+      // Load projects from repos.json and create sidebar bars
       async function loadProjects() {
         try {
-          const response = await fetch("data.json");
+          const response = await fetch("repos.json");
           const projects = await response.json();
 
           // Sort by priority (ascending - lower numbers first)
@@ -771,12 +838,11 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
 
     <!-- GitHub Contribution Graph Script -->
     <script>
-      // Fetch and display GitHub contribution graph
+      // Fetch and display GitHub contribution graph for 3 years
       async function loadGitHubActivity() {
-        const grid = document.getElementById("contributionGrid");
-        const username = "Ta11-Man";
-        const cacheKey = "github_activity_cache";
-        const cacheTimeout = 10 * 60 * 1000; // 10 minutes
+        const cacheKey = "github_activity_local_cache";
+        // Cache for 1 hour since we control the data generation now
+        const cacheTimeout = 60 * 60 * 1000;
 
         try {
           // Check cache
@@ -784,109 +850,105 @@ Retrieved 2025-11-25, License - CC BY-SA 3.0
           if (cached) {
             const { data, timestamp } = JSON.parse(cached);
             if (Date.now() - timestamp < cacheTimeout) {
-              renderContributionGraph(data);
+              renderAllYears(data);
               return;
             }
           }
 
-          // Fetch from GitHub API
-          const response = await fetch(
-            `https://api.github.com/users/${username}/events?per_page=100`
-          );
-
+          // Fetch from local data.json
+          const response = await fetch("data.json");
           if (!response.ok) {
-            throw new Error("Failed to fetch GitHub data");
+            throw new Error("Failed to fetch data.json");
           }
 
-          const events = await response.json();
-
-          // Filter push events and aggregate by date
-          const commitsByDate = {};
-          const now = new Date();
-          const twentyeightWeeksAgo = new Date(
-            now - 28 * 7 * 24 * 60 * 60 * 1000
-          );
-
-          events
-            .filter((event) => event.type === "PushEvent")
-            .forEach((event) => {
-              const date = new Date(event.created_at);
-              if (date >= twentyeightWeeksAgo) {
-                const dateStr = date.toISOString().split("T")[0];
-                const commits = event.payload.commits
-                  ? event.payload.commits.length
-                  : 1;
-                commitsByDate[dateStr] =
-                  (commitsByDate[dateStr] || 0) + commits;
-              }
-            });
+          const fullData = await response.json();
+          const commitData = fullData.gitCommits; // Array of { year, commits: [{date, count}] }
 
           // Cache the data
           localStorage.setItem(
             cacheKey,
             JSON.stringify({
-              data: commitsByDate,
+              data: commitData,
               timestamp: Date.now(),
             })
           );
 
-          renderContributionGraph(commitsByDate);
+          renderAllYears(commitData);
         } catch (error) {
           console.error("Error loading GitHub activity:", error);
-          grid.innerHTML =
-            '<div class="error-text">Unable to load activity</div>';
+          // Show error in all grids
+          ["2023", "2024", "2025", "2026"].forEach((year) => {
+            const grid = document.getElementById(`grid-${year}`);
+            if (grid) grid.innerHTML = '<div class="error-text">Failed</div>';
+          });
         }
       }
 
-      function renderContributionGraph(commitsByDate) {
-        const grid = document.getElementById("contributionGrid");
+      function renderAllYears(gitCommits) {
+        // gitCommits is array of { year: "202X", commits: [...] }
+        gitCommits.forEach((yearData) => {
+          renderYearGrid(yearData.year, yearData.commits);
+        });
+      }
+
+      function getContributionLevel(count) {
+        if (count === 0) return 0;
+        if (count <= 2) return 1;
+        if (count <= 5) return 2;
+        if (count <= 9) return 3;
+        return 4;
+      }
+
+      function renderYearGrid(year, contributions) {
+        const grid = document.getElementById(`grid-${year}`);
+        if (!grid) return;
         grid.innerHTML = "";
 
-        // Create 196 cells (28 weeks × 7 days)
-        const now = new Date();
-        const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; // For consistent ordering
-        const cells = Array(7)
+        // Sort contributions by date (should already be sorted but good to ensure)
+        contributions.sort((a, b) => a.date.localeCompare(b.date));
+
+        // We need to render 53 weeks (rows) x 7 days (cols)
+        const cells = Array(53)
           .fill(null)
-          .map(() => Array(28).fill(null));
+          .map(() => Array(7).fill(null));
 
-        for (let week = 0; week < 28; week++) {
-          for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
-            // Calculate the date for the current cell (week, dayOfWeek)
-            // Start from today and go back in time
-            const dateOffset = week * 7 + (6 - dayOfWeek); // Adjust for reversing order if needed, assuming cells are rendered top-to-bottom, left-to-right
-            const date = new Date(now - dateOffset * 24 * 60 * 60 * 1000);
-            const dateStr = date.toISOString().split("T")[0];
-            const commits = commitsByDate[dateStr] || 0;
+        let weekIndex = 0;
 
+        contributions.forEach((day, index) => {
+          // Parse date as UTC
+          const date = new Date(day.date);
+          const dayOfWeek = date.getUTCDay(); // 0 (Sun) - 6 (Sat) using UTC
+
+          if (dayOfWeek === 0 && index > 0) {
+            weekIndex++;
+          }
+
+          if (weekIndex < 53) {
+            cells[weekIndex][dayOfWeek] = day;
+          }
+        });
+
+        // Now render the grid
+        for (let w = 0; w < 53; w++) {
+          for (let d = 0; d < 7; d++) {
+            const dayData = cells[w][d];
             const cell = document.createElement("div");
             cell.className = "contribution-cell";
 
-            // Determine level (0-4) based on commit count
-            let level = 0;
-            if (commits > 0) level = 1;
-            if (commits >= 3) level = 2;
-            if (commits >= 6) level = 3;
-            if (commits >= 10) level = 4;
-
-            cell.setAttribute("data-level", level);
-            cell.title = `${dateStr}: ${commits} commit${
-              commits !== 1 ? "s" : ""
-            }`;
-
-            // Store cell in a 2D array to arrange correctly later
-            cells[dayOfWeek][27 - week] = cell; // Store cells to render from right to left (most recent week on right)
-          }
-        }
-
-        // Append cells to grid in the desired order (row by row, then column by column)
-        // This will create a grid with 7 columns (days) and 28 rows (weeks)
-        for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
-          for (let week = 0; week < 28; week++) {
-            grid.appendChild(cells[dayOfWeek][week]);
+            if (dayData) {
+              const level = getContributionLevel(dayData.count);
+              cell.setAttribute("data-level", level);
+              cell.title = `${dayData.date}: ${dayData.count} commit${
+                dayData.count !== 1 ? "s" : ""
+              }`;
+            } else {
+              // Empty cell (padding)
+              cell.style.opacity = "0";
+            }
+            grid.appendChild(cell);
           }
         }
       }
-
       // Load when DOM is ready
       if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", loadGitHubActivity);
