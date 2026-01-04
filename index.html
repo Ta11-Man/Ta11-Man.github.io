@@ -26,23 +26,23 @@
   <body>
     <!-- Loading Overlay -->
 
-    <div
-      id="decoration"
-      style="
-        position: absolute;
-        top: 0;
-        left: 0;
-        scale: 1;
-        width: 100%;
-        height: 100%;
-        transition: scale 0.5s cubic-bezier(0, 2, 0.6, 1);
-      "
+    <a
+      href="https://gabe.halste.ad"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github-link"
     >
-      <a
-        href="https://gabe.halste.ad"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="github-link"
+      <div
+        id="decoration"
+        style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          scale: 1;
+          width: 100%;
+          height: 100%;
+          transition: scale 0.5s cubic-bezier(0, 2, 0.6, 1);
+        "
       >
         <div class="ninja-wrapper">
           <img
@@ -58,8 +58,8 @@
             <div class="eye right"><div class="pupil"></div></div>
           </div>
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
     <!-- content sections -->
     <a
       href="https://github.com/Ta11-Man"
@@ -68,7 +68,6 @@
       class="github-link profile-pic-container"
     >
       <img
-        id="profile-pic"
         src="https://avatars.githubusercontent.com/u/143021084"
         alt="Github profile picture"
         style="
@@ -100,50 +99,7 @@
 
     <!-- Project Sidebar -->
     <div class="repos-section">
-      <div class="repos-header">
-        <div class="repos-label">Repos</div>
-        <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
-          <!-- Sun Icon for Light Mode -->
-          <svg
-            class="sun-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <!-- Moon Icon for Dark Mode -->
-          <svg
-            class="moon-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            style="display: none"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
-      </div>
+      <div class="repos-label">Repos</div>
       <div class="project-sidebar" id="projectSidebar"></div>
     </div>
 

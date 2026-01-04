@@ -44,8 +44,6 @@
   --glow: drop-shadow(0px 0px 8px rgba(7, 255, 237, 0.5));
   --glow-tight: drop-shadow(0px 0px 1px rgba(7, 255, 237, 0.7));
   --bg-color: var(--github-med);
-  /* Profile Picture */
-  --dp-url: url("https://avatars.githubusercontent.com/u/143021084");
 }
 
 .ninja-wrapper {
@@ -54,8 +52,7 @@
   right: 31vh;
   height: 32vh;
   width: auto;
-  pointer-events: auto;
-  cursor: pointer;
+  pointer-events: none;
   transform: translateX(50%);
 }
 .eyes-container {
@@ -70,7 +67,7 @@
   position: absolute;
   width: 4.5vh;
   height: 4.5vh;
-  background: var(--eye-bg);
+  background: #007265ff;
   border-radius: 20%;
   left: 0;
   bottom: 0;
@@ -84,7 +81,7 @@
   position: absolute;
   width: 3vh;
   height: 3vh;
-  background: var(--pupil-bg);
+  background: #10f2f4ff;
   border-radius: 20%;
   top: 0.8vh; /* center pupil in 4.5vh eye */
   left: 0.8vh;
@@ -92,7 +89,7 @@
   filter: blur(3px);
   -webkit-filter: blur(3px);
 }
-body {
+</style > <style > body {
   margin: 0;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -102,15 +99,15 @@ body {
   /* Dot grid patters */
   background-image: radial-gradient(
     circle,
-    var(--dot-color-1) 1px,
+    rgba(7, 255, 237, 0.15) 1px,
     transparent 1px
   );
   background-image: radial-gradient(
       circle,
-      var(--dot-color-2) 1px,
+      rgba(7, 255, 237, 0.1) 1px,
       transparent 1px
     ),
-    radial-gradient(circle, var(--dot-color-3) 1px, transparent 1px);
+    radial-gradient(circle, rgba(7, 255, 237, 0.05) 1px, transparent 1px);
   background-position: 0 0, 15px 0px;
   background-size: 30px 30px;
   text-align: center;
@@ -121,7 +118,7 @@ img {
 p {
   font-size: 3.5vh;
   text-align: center;
-  color: var(--text-secondary);
+  color: var(--teal-med);
   font-family: var(--Hurmit);
   margin: 5vw;
   filter: var(--glow-tight);
@@ -132,7 +129,7 @@ h1 {
   position: relative;
   font-family: var(--Hurmit);
   filter: var(--glow);
-  color: var(--text-primary);
+  color: var(--teal-light);
   z-index: 10;
 }
 .cover {
@@ -165,40 +162,6 @@ a.github-link img {
   }
 }
 
-/* Theme Toggle */
-.repos-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2vh;
-  padding-left: 1vw;
-  pointer-events: auto;
-}
-
-.repos-header .repos-label {
-  margin-bottom: 0;
-  padding-left: 0;
-}
-
-.theme-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-primary);
-  cursor: pointer;
-  padding: 0.5vh;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  filter: var(--glow-tight);
-}
-
-.theme-btn:hover {
-  background: var(--card-hover-bg);
-  transform: rotate(15deg);
-}
-
 /* Project Sidebar Styles */
 .repos-section {
   position: fixed;
@@ -215,7 +178,7 @@ a.github-link img {
   font-family: var(--Hurmit);
   font-size: 3vh;
   font-weight: bold;
-  color: var(--text-primary);
+  color: var(--teal-light);
   filter: var(--glow);
   text-shadow: 0 0 15px rgba(7, 255, 237, 0.6);
   margin-bottom: 2vh;
@@ -228,14 +191,13 @@ a.github-link img {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 1.5vw 1.5vw 1.5vh 1.5vw; /* Increased padding for shadows */
+  padding: 0 1vw 1vh 1vw;
   pointer-events: none;
   display: flex;
   flex-direction: column;
-  gap: 1.5vh;
+  gap: 1.5vh; /* Adjusted spacing */
   scrollbar-width: thin;
   scrollbar-color: rgba(7, 255, 237, 0.3) rgba(0, 109, 107, 0.1);
-  direction: rtl; /* Move scrollbar to left */
 }
 
 .project-sidebar::-webkit-scrollbar {
@@ -259,7 +221,6 @@ a.github-link img {
 
 .project-bar {
   position: relative;
-  direction: ltr; /* Reset text direction */
   background: linear-gradient(
     135deg,
     rgba(0, 109, 107, 0.15),
@@ -327,7 +288,7 @@ a.github-link img {
   font-family: var(--Hurmit);
   font-size: 2.2vh;
   font-weight: bold;
-  color: var(--text-primary);
+  color: var(--teal-light);
   margin: 0 0 1vh 0;
   filter: var(--glow-tight);
   text-shadow: 0 0 10px rgba(7, 255, 237, 0.5);
@@ -351,7 +312,7 @@ a.github-link img {
   );
   border: 1px solid rgba(7, 255, 237, 0.5);
   border-radius: 20px;
-  color: var(--text-primary); /* Brighter text */
+  color: var(--teal-light); /* Brighter text */
   text-transform: uppercase;
   letter-spacing: 0.5px;
   text-shadow: 0 0 8px rgba(7, 255, 237, 0.4); /* Added glow */
@@ -382,9 +343,16 @@ a.github-link img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 109, 107, 0.15),
+    rgba(0, 54, 50, 0.25)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(7, 255, 237, 0.3);
   border-radius: 12px;
-  padding: 1vh;
-  background: var(--card-bg);
+  padding: 1vh 0.5vw;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(7, 255, 237, 0.1);
 }
 
@@ -392,7 +360,7 @@ a.github-link img {
   font-family: var(--Hurmit);
   font-size: 2vh;
   font-weight: bold;
-  color: var(--text-primary);
+  color: var(--teal-light);
   margin-bottom: 1.5vh;
   text-align: center;
   filter: var(--glow-tight);
@@ -407,7 +375,7 @@ a.github-link img {
 .year-label {
   font-family: var(--Hurmit-m);
   font-size: 1.5vh;
-  color: var(--text-secondary);
+  color: var(--teal-med);
   margin-bottom: 0.5vh;
   font-weight: bold;
 }
@@ -430,26 +398,26 @@ a.github-link img {
   transition: all 0.3s;
 }
 .contribution-cell[data-level="0"] {
-  background: var(--cell-empty);
+  background: rgba(0, 54, 50, 0.3);
 }
 .contribution-cell[data-level="1"] {
-  background: var(--cell-l1);
+  background: rgba(7, 255, 237, 0.2);
   border-color: rgba(7, 255, 237, 0.3);
 }
 .contribution-cell[data-level="2"] {
-  background: var(--cell-l2);
+  background: rgba(7, 255, 237, 0.4);
   border-color: rgba(7, 255, 237, 0.5);
   box-shadow: 0 0 5px rgba(7, 255, 237, 0.3);
 }
 .contribution-cell[data-level="3"] {
-  background: var(--cell-l3);
+  background: rgba(7, 255, 237, 0.6);
   border-color: rgba(7, 255, 237, 0.7);
   box-shadow: 0 0 8px rgba(7, 255, 237, 0.5);
 }
 .contribution-cell[data-level="4"] {
-  background: var(--cell-l4);
-  border-color: rgba(7, 255, 237, 0.7);
-  box-shadow: 0 0 8px rgba(7, 255, 237, 0.5);
+  background: var(--teal-light);
+  border-color: var(--teal-light);
+  box-shadow: 0 0 12px rgba(7, 255, 237, 0.7);
 }
 .loading-text,
 .error-text {
@@ -457,16 +425,12 @@ a.github-link img {
   font-size: 1.4vh;
   text-align: center;
   padding: 2vh 0;
-  color: var(--text-secondary);
+  color: var(--teal-med);
 }
 .error-text {
   color: rgba(255, 100, 100, 0.8);
 }
 
-/* Profile Picture Logic */
-#profile-pic {
-  content: var(--dp-url);
-}
 /* Responsive Design */
 @media (max-width: 150vh) {
   .activity-container {
@@ -524,6 +488,7 @@ a.github-link img {
     transform: translateX(-50%);
   }
 
+  /* 2. Title Text - Below Picture */
   .title-container {
     position: absolute;
     left: 50%;
@@ -582,81 +547,4 @@ a.github-link img {
   .activity-container {
     display: none;
   }
-}
-
-/* Theme Definitions */
-:root {
-  /* Theme Variables Override */
-  --bg-color: #0d1117;
-  --text-primary: #07ffedff;
-  --text-secondary: #006d6bff;
-
-  --card-bg: rgba(0, 109, 107, 0.15);
-  --card-hover-bg: rgba(0, 109, 107, 0.25);
-
-  --tag-bg-1: rgba(7, 255, 237, 0.25);
-  --tag-bg-2: rgba(0, 109, 107, 0.35);
-  --tag-border: rgba(7, 255, 237, 0.5);
-
-  --glow-color: rgba(7, 255, 237, 0.5);
-  --glow-tight-color: rgba(7, 255, 237, 0.7);
-
-  --eye-bg: #007265ff;
-  --pupil-bg: #10f2f4ff;
-
-  --glow: drop-shadow(0px 0px 8px var(--glow-color));
-  --glow-tight: drop-shadow(0px 0px 1px var(--glow-tight-color));
-}
-
-[data-theme="light"] {
-  --bg-color: #b9c4d4;
-  --text-primary: rgb(0, 70, 65);
-  --text-secondary: rgb(0, 129, 127);
-
-  --tag-bg-2: rgba(9, 105, 218, 0.6);
-  --tag-border: rgba(9, 105, 218, 0.7);
-
-  --dp-url: url("assets/dp-s25.png");
-  p {
-    font-weight: bold;
-    text-shadow: 0 0 8px rgb(255, 255, 255);
-  }
-}
-
-/* Update gradient components using vars */
-.project-bar {
-  background: var(--card-bg);
-  /* Use gradient if needed or just solid/glass */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.project-bar:hover {
-  background: var(--card-hover-bg);
-}
-.language-tag {
-  background: linear-gradient(135deg, var(--tag-bg-1), var(--tag-bg-2));
-  border: 1px solid var(--tag-border);
-}
-
-:root {
-  --dot-color-1: rgba(7, 255, 237, 0.15);
-  --dot-color-2: rgba(7, 255, 237, 0.1);
-  --dot-color-3: rgba(7, 255, 237, 0.05);
-  /* Contribution Graph */
-  --cell-empty: rgba(0, 54, 50, 0.3);
-  --cell-l1: rgba(7, 255, 237, 0.2);
-  --cell-l2: rgba(7, 255, 237, 0.4);
-  --cell-l3: rgba(7, 255, 237, 0.6);
-  --cell-l4: rgba(7, 255, 237, 0.8);
-}
-[data-theme="light"] {
-  --dot-color-1: rgba(0, 0, 0, 0.5);
-  --dot-color-2: rgba(0, 0, 0, 0.25);
-  --dot-color-3: rgba(0, 0, 0, 0.1);
-
-  --cell-empty: rgba(0, 0, 0, 0.05);
-  --cell-l1: rgba(9, 105, 218, 0.2);
-  --cell-l2: rgba(9, 105, 218, 0.4);
-  --cell-l3: rgba(9, 105, 218, 0.6);
-  --cell-l4: rgba(9, 105, 218, 0.8);
 }

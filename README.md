@@ -14,7 +14,7 @@ pointer-events: none;
 
 This _was_ a portfolio site for a school project. Now it's the front to my Github showcase to make it easier to navigate my projects.
 
-It's loaded semi-dynamically from a JSON file so that I can taylor and polish how each repo is displayed (e.g. give it a friendly name). The commit bars are loaded automatically from a JSON file, which is updated automatically by <u>Github actions</u>.
+It's loaded semi-dynamically from a JSON file so that I can taylor and polish how each repo is displayed (e.g. give it a friendly name). The commit bars are loaded automatically from a JSON file, which is updated automatically by Github actions.
 
 For local testing, this command is probably needed:
 
