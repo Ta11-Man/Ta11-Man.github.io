@@ -73,13 +73,15 @@ setInterval(blink, 10000);
 // Load projects from repos.json and create sidebar bars
 async function loadProjects() {
   try {
-    const response = await fetch("repos.json");
+    const response = await fetch(`repos.json?t=${Date.now()}`);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const projects = await response.json();
 
     // Sort by priority (ascending - lower numbers first)
     projects.sort((a, b) => a.priority - b.priority);
 
     const sidebar = document.getElementById("projectSidebar");
+    sidebar.innerHTML = ""; // Clear existing content
 
     projects.forEach((project, index) => {
       // Create project bar link
@@ -114,6 +116,10 @@ async function loadProjects() {
     });
   } catch (error) {
     console.error("Error loading projects:", error);
+    const sidebar = document.getElementById("projectSidebar");
+    if (sidebar) {
+      sidebar.innerHTML = `<div class="error-text">Failed to load projects.<br>${error.message}</div>`;
+    }
   }
 }
 
@@ -241,3 +247,44 @@ if (document.readyState === "loading") {
 } else {
   loadGitHubActivity();
 }
+
+// Theme Toggle Logic
+const themeToggleBtn = document.getElementById("theme-toggle");
+const sunIcon = document.querySelector(".sun-icon");
+const moonIcon = document.querySelector(".moon-icon");
+
+function setTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+
+  if (theme === "dark") {
+    if (sunIcon) sunIcon.style.display = "block";
+    if (moonIcon) moonIcon.style.display = "none";
+  } else {
+    if (sunIcon) sunIcon.style.display = "none";
+    if (moonIcon) moonIcon.style.display = "block";
+  }
+}
+
+function getPreferredTheme() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    return savedTheme;
+  }
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+// Initialize
+document.addEventListener("DOMContentLoaded", () => {
+  setTheme(getPreferredTheme());
+
+  const btn = document.getElementById("theme-toggle");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      setTheme(currentTheme === "dark" ? "light" : "dark");
+    });
+  }
+});
