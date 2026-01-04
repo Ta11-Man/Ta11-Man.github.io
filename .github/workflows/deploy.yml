@@ -1,0 +1,36 @@
+name: Deploy Website with Data
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs daily at midnight
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate Data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        run: python generate_data.py # This creates data.json in the current folder
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Minecraft Server Management",
+    "link": "https://github.com/Ta11-Man/minecraft-server",
+    "languages": ["Python", "YAML"],
+    "priority": 1
+  },
+  {
+    "name": "Github Website",
+    "link": "https://github.com/Ta11-Man/Ta11-Man.github.io",
+    "languages": ["HTML", "CSS", "JavaScript"],
+    "priority": 5
+  },
+  {
+    "name": "High Standard Font",
+    "link": "https://github.com/Ta11-Man/High-Standard",
+    "languages": ["Typography", "Design"],
+    "priority": 4
+  },
+  {
+    "name": "Solar Bracket",
+    "link": "https://github.com/Ta11-Man/solar-bracket",
+    "languages": ["TinkerCAD", "Blender"],
+    "priority": 1
+  },
+  {
+    "name": "Messaging App",
+    "link": "https://github.com/hvaranasi9/project-04-revised",
+    "languages": ["Java", "Sockets"],
+    "priority": 2
+  },
+  {
+    "name": "Robotic Arm",
+    "link": "https://github.com/Ta11-Man/ge-ai-s24",
+    "languages": ["Gymnasium", "ROS", "Python"],
+    "priority": 2
+  },
+  {
+    "name": "Wordle Game",
+    "link": "https://github.com/Ta11-Man/EBEC-python",
+    "languages": ["Python", "Turtle", "numpy"],
+    "priority": 3
+  },
+  {
+    "name": "Keyboard",
+    "link": "https://github.com/Ta11-Man/cs489-keyboard",
+    "languages": ["C", "Arduino IDE"],
+    "priority": 4
+  }
+]

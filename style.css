@@ -1,0 +1,550 @@
+@font-face {
+  font-family: Hurmit;
+  src: url("font/HurmitNerdFont-Regular.otf");
+}
+@font-face {
+  font-family: Hurmit;
+  font-weight: bold;
+  src: url("font/HurmitNerdFont-Bold.otf");
+}
+@font-face {
+  font-family: Hurmit;
+  font-weight: light;
+  src: url("font/HurmitNerdFont-Light.otf");
+}
+@font-face {
+  font-family: Hurmit;
+  font-style: italic;
+  src: url("font/HurmitNerdFont-Italic.otf");
+}
+@font-face {
+  font-family: HurmitMono;
+  font-weight: bold;
+  src: url("font/HurmitNerdFontMono-Bold.otf");
+}
+@font-face {
+  font-family: HurmitMono;
+  src: url("font/HurmitNerdFontMono-Regular.otf");
+}
+
+:root {
+  --Hurmit: "Hurmit";
+  --Hurmit-b: "Hurmit", bold;
+  --Hurmit-m: "HurmitMono";
+  /* CUSTOMIZE LOADER HERE: */
+  --loader-color: #16407a; /* Spinner color and text color */
+  --github-light: #212830;
+  --github-med: #0d1117;
+  --github-dark: #010409;
+  --teal-light: #07ffedff;
+  --teal-med: #006d6bff;
+  --teal-dark: #003632ff;
+  --black: black;
+  --testing: red;
+  --glow: drop-shadow(0px 0px 8px rgba(7, 255, 237, 0.5));
+  --glow-tight: drop-shadow(0px 0px 1px rgba(7, 255, 237, 0.7));
+  --bg-color: var(--github-med);
+}
+
+.ninja-wrapper {
+  position: absolute;
+  bottom: 2%;
+  right: 31vh;
+  height: 32vh;
+  width: auto;
+  pointer-events: none;
+  transform: translateX(50%);
+}
+.eyes-container {
+  position: absolute;
+  left: 34%; /* adjust as needed to align with ninja's face */
+  top: 19%; /* adjust as needed to align with ninja's face */
+  width: 12vh;
+  height: 6vh;
+  pointer-events: auto;
+}
+.eye {
+  position: absolute;
+  width: 4.5vh;
+  height: 4.5vh;
+  background: #007265ff;
+  border-radius: 20%;
+  left: 0;
+  bottom: 0;
+  transition: transform 0.2s cubic-bezier(0.4, 2, 0.6, 1);
+  overflow: hidden;
+}
+.eye.right {
+  left: 5vh;
+}
+.pupil {
+  position: absolute;
+  width: 3vh;
+  height: 3vh;
+  background: #10f2f4ff;
+  border-radius: 20%;
+  top: 0.8vh; /* center pupil in 4.5vh eye */
+  left: 0.8vh;
+  transition: left 0.08s, top 0.08s;
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+}
+</style > <style > body {
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
+  /* Dot grid patters */
+  background-image: radial-gradient(
+    circle,
+    rgba(7, 255, 237, 0.15) 1px,
+    transparent 1px
+  );
+  background-image: radial-gradient(
+      circle,
+      rgba(7, 255, 237, 0.1) 1px,
+      transparent 1px
+    ),
+    radial-gradient(circle, rgba(7, 255, 237, 0.05) 1px, transparent 1px);
+  background-position: 0 0, 15px 0px;
+  background-size: 30px 30px;
+  text-align: center;
+}
+img {
+  filter: var(--glow);
+}
+p {
+  font-size: 3.5vh;
+  text-align: center;
+  color: var(--teal-med);
+  font-family: var(--Hurmit);
+  margin: 5vw;
+  filter: var(--glow-tight);
+  z-index: 10;
+  position: relative;
+}
+h1 {
+  position: relative;
+  font-family: var(--Hurmit);
+  filter: var(--glow);
+  color: var(--teal-light);
+  z-index: 10;
+}
+.cover {
+  background-color: var(--testing);
+  z-index: 10;
+  position: absolute;
+  width: 100vw;
+  border-radius: 50%;
+  top: 0;
+  right: 0;
+  max-width: 50vh;
+}
+
+/* Links */
+a.github-link {
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  display: block;
+}
+a.github-link img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media (max-width: 60vh) {
+  .pc {
+    display: none;
+  }
+}
+
+/* Project Sidebar Styles */
+.repos-section {
+  position: fixed;
+  left: 2vw;
+  top: 2vh;
+  width: 40vw;
+  max-height: calc(100vh - 4vh);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.repos-label {
+  font-family: var(--Hurmit);
+  font-size: 3vh;
+  font-weight: bold;
+  color: var(--teal-light);
+  filter: var(--glow);
+  text-shadow: 0 0 15px rgba(7, 255, 237, 0.6);
+  margin-bottom: 2vh;
+  text-align: left;
+  padding-left: 1vw;
+  pointer-events: none;
+}
+
+.project-sidebar {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 1vw 1vh 1vw;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vh; /* Adjusted spacing */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(7, 255, 237, 0.3) rgba(0, 109, 107, 0.1);
+}
+
+.project-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.project-sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 109, 107, 0.1);
+  border-radius: 10px;
+}
+
+.project-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(7, 255, 237, 0.3);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.project-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(7, 255, 237, 0.5);
+}
+
+.project-bar {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 109, 107, 0.15),
+    rgba(0, 54, 50, 0.25)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(7, 255, 237, 0.3);
+  border-radius: 12px;
+  padding: 2vh 2.5vw;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(7, 255, 237, 0.1);
+  opacity: 0;
+  transform: translateY(150%);
+  animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  text-decoration: none;
+  display: block;
+}
+
+.project-bar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(7, 255, 237, 0.1),
+    transparent
+  );
+  transition: left 0.6s;
+}
+
+.project-bar:hover::before {
+  left: 100;
+}
+
+.project-bar:hover {
+  transform: scale(1.03) translateX(-5px);
+  border-color: rgba(7, 255, 237, 0.6);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4), 0 0 30px rgba(7, 255, 237, 0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 109, 107, 0.25),
+    rgba(0, 54, 50, 0.35)
+  );
+}
+
+.project-bar:active {
+  transform: scale(0.98) translateX(-50px);
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.project-title {
+  font-family: var(--Hurmit);
+  font-size: 2.2vh;
+  font-weight: bold;
+  color: var(--teal-light);
+  margin: 0 0 1vh 0;
+  filter: var(--glow-tight);
+  text-shadow: 0 0 10px rgba(7, 255, 237, 0.5);
+}
+
+.project-languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8vh;
+}
+
+.language-tag {
+  font-family: var(--Hurmit-m);
+  font-size: 1.4vh;
+  padding: 0.5vh 1vh;
+  /* Improved contrast */
+  background: linear-gradient(
+    135deg,
+    rgba(7, 255, 237, 0.25),
+    rgba(0, 109, 107, 0.35)
+  );
+  border: 1px solid rgba(7, 255, 237, 0.5);
+  border-radius: 20px;
+  color: var(--teal-light); /* Brighter text */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 8px rgba(7, 255, 237, 0.4); /* Added glow */
+  filter: drop-shadow(0px 0px 4px rgba(7, 255, 237, 0.3));
+}
+
+/* GitHub Contribution Graph */
+.activity-container {
+  position: absolute;
+  right: 65vh;
+  top: 50%;
+  transform: translate(0, -50%); /* Align right edge */
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none; /* Let clicks pass through container */
+}
+
+.years-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  pointer-events: auto; /* Re-enable clicks on grids */
+}
+
+.year-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 109, 107, 0.15),
+    rgba(0, 54, 50, 0.25)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(7, 255, 237, 0.3);
+  border-radius: 12px;
+  padding: 1vh 0.5vw;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(7, 255, 237, 0.1);
+}
+
+.commit-title {
+  font-family: var(--Hurmit);
+  font-size: 2vh;
+  font-weight: bold;
+  color: var(--teal-light);
+  margin-bottom: 1.5vh;
+  text-align: center;
+  filter: var(--glow-tight);
+  text-shadow: 0 0 10px rgba(7, 255, 237, 0.5);
+  background: rgba(0, 54, 50, 0.5);
+  padding: 0.5vh 1vw;
+  border-radius: 8px;
+  border: 1px solid rgba(7, 255, 237, 0.2);
+  pointer-events: auto;
+}
+
+.year-label {
+  font-family: var(--Hurmit-m);
+  font-size: 1.5vh;
+  color: var(--teal-med);
+  margin-bottom: 0.5vh;
+  font-weight: bold;
+}
+
+.contribution-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(53, 1fr); /* Up to 53 weeks */
+  gap: 2px;
+}
+
+.contribution-cell {
+  width: 0.8vh;
+  height: 0.8vh;
+  min-width: 1px;
+  min-height: 1px;
+  border-radius: 1px;
+  background: rgba(0, 109, 107, 0.2);
+  border: 1px solid rgba(7, 255, 237, 0.1);
+  transition: all 0.3s;
+}
+.contribution-cell[data-level="0"] {
+  background: rgba(0, 54, 50, 0.3);
+}
+.contribution-cell[data-level="1"] {
+  background: rgba(7, 255, 237, 0.2);
+  border-color: rgba(7, 255, 237, 0.3);
+}
+.contribution-cell[data-level="2"] {
+  background: rgba(7, 255, 237, 0.4);
+  border-color: rgba(7, 255, 237, 0.5);
+  box-shadow: 0 0 5px rgba(7, 255, 237, 0.3);
+}
+.contribution-cell[data-level="3"] {
+  background: rgba(7, 255, 237, 0.6);
+  border-color: rgba(7, 255, 237, 0.7);
+  box-shadow: 0 0 8px rgba(7, 255, 237, 0.5);
+}
+.contribution-cell[data-level="4"] {
+  background: var(--teal-light);
+  border-color: var(--teal-light);
+  box-shadow: 0 0 12px rgba(7, 255, 237, 0.7);
+}
+.loading-text,
+.error-text {
+  font-family: var(--Hurmit-m);
+  font-size: 1.4vh;
+  text-align: center;
+  padding: 2vh 0;
+  color: var(--teal-med);
+}
+.error-text {
+  color: rgba(255, 100, 100, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 150vh) {
+  .activity-container {
+    display: none; /* Hide if overlaps */
+  }
+}
+@media (max-width: 150vh) {
+  .year-column1 {
+    display: none; /* Hide if overlaps */
+  }
+}
+@media (max-width: 175vh) {
+  .year-column2 {
+    display: none; /* Hide if overlaps */
+  }
+}
+@media (max-width: 200vh) {
+  .year-column3 {
+    display: none; /* Hide if overlaps */
+  }
+}
+
+@media (max-width: 100vh) {
+  body {
+    overflow-y: auto; /* Enable scroll */
+    min-height: 100vh;
+    height: auto;
+  }
+  h1 {
+    font-size: min(15vw, 10vh);
+    margin-top: 1vh;
+    margin-bottom: min(30vh, 100vw);
+  }
+  p {
+    font-size: min(3.2vh, 4.3vw);
+    margin: 5vw; /* Provides 5vw spacing on all sides */
+    width: auto; /* Allow width to adjust based on margins */
+    text-align: center;
+  }
+
+  /* 1. Profile Picture - Centered at top */
+  .profile-pic-container {
+    position: absolute;
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60vw !important;
+    max-width: 300px !important;
+  }
+  .profile-pic-container img {
+    position: absolute;
+    width: 100vw;
+    max-width: none;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* 2. Title Text - Below Picture */
+  .title-container {
+    position: absolute;
+    left: 50%;
+    top: 60vw;
+    transform: translateX(-50%);
+    width: 90vw;
+  }
+
+  /* 3. Ninja - Below Title */
+
+  .ninja-wrapper {
+    position: absolute;
+    right: 50vw;
+    transform: translateX(50%);
+    display: block;
+  }
+
+  /* 4. Project Bars - Below Ninja */
+  .repos-section {
+    position: absolute;
+    left: 0;
+    top: 100vh;
+    width: 95vw;
+    max-width: 99vw;
+    max-height: none;
+    margin: 3vh auto 5vh auto;
+    padding: 0 2vw;
+  }
+
+  .repos-label {
+    font-size: 2.5vh;
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .project-sidebar {
+    overflow-y: visible;
+    padding: 0 2vw 2vh 2vw;
+    width: 90vw;
+    /* background-color: red; */
+  }
+
+  .project-bar {
+    padding: 1.5vh 1.5vw;
+    width: 98%;
+  }
+
+  .project-title {
+    font-size: 2vh;
+  }
+
+  .language-tag {
+    font-size: 1.2vh;
+  }
+
+  .activity-container {
+    display: none;
+  }
+}
