@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ta11 Man</title>
+    <meta property="og:title" content="Ta11 Man's Github" />
+    <meta
+      property="og:description"
+      content="Visual front for Gabe Halstead's Github, Computer Science Student and System Developer."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:updated_time" content="2025-11-30" />
+
+    <meta property="og:image" content="ninja-essence-head" />
+    <meta property="og:url" content="https://Ta11-Man.github.io" />
+
+    <link
+      rel="icon"
+      href="assets/ninja-essence-head.svg"
+      type="image/svg+xml"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Loading Overlay -->
+
+    <a
+      href="https://gabe.halste.ad"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github-link"
+    >
+      <div
+        id="decoration"
+        style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          scale: 1;
+          width: 100%;
+          height: 100%;
+          transition: scale 0.5s cubic-bezier(0, 2, 0.6, 1);
+        "
+      >
+        <div class="ninja-wrapper">
+          <img
+            id="ninja"
+            src="assets/ninja-essence-noeye.svg"
+            alt="Ninja"
+            loading="eager"
+            fetchpriority="high"
+            style="display: block; width: auto; height: 35vh"
+          />
+          <div class="eyes-container">
+            <div class="eye left"><div class="pupil"></div></div>
+            <div class="eye right"><div class="pupil"></div></div>
+          </div>
+        </div>
+      </div>
+    </a>
+    <!-- content sections -->
+    <a
+      href="https://github.com/Ta11-Man"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github-link profile-pic-container"
+    >
+      <img
+        src="https://avatars.githubusercontent.com/u/143021084"
+        alt="Github profile picture"
+        style="
+          position: absolute;
+          width: 100vw;
+          border-radius: 50%;
+          top: 0;
+          right: 0;
+          max-width: 60vh;
+          z-index: 1;
+        "
+      />
+      <div
+        class="title-container"
+        style="
+          position: absolute;
+          width: 100vw;
+          border-radius: 50%;
+          top: 0;
+          right: 0;
+          max-width: 60vh;
+          z-index: 1;
+        "
+      >
+        <h1>Ta11-Man</h1>
+        <p>Gabriel Halstead, Github extraordinaire.</p>
+      </div>
+    </a>
+
+    <!-- Project Sidebar -->
+    <div class="repos-section">
+      <div class="repos-label">Repos</div>
+      <div class="project-sidebar" id="projectSidebar"></div>
+    </div>
+
+    <!-- GitHub Contribution Display -->
+    <div class="activity-container" id="activityContainer">
+      <div class="commit-title">GitHub Activity</div>
+      <div class="years-wrapper">
+        <div class="year-column year-column3">
+          <div class="year-label">2023</div>
+          <div class="contribution-grid" id="grid-2023">
+            <div class="loading-text">...</div>
+          </div>
+        </div>
+        <div class="year-column year-column2">
+          <div class="year-label">2024</div>
+          <div class="contribution-grid" id="grid-2024">
+            <div class="loading-text">...</div>
+          </div>
+        </div>
+        <div class="year-column">
+          <div class="year-label">2025</div>
+          <div class="contribution-grid" id="grid-2025">
+            <div class="loading-text">...</div>
+          </div>
+        </div>
+        <div class="year-column year-column1">
+          <div class="year-label">2026</div>
+          <div class="contribution-grid" id="grid-2026">
+            <div class="loading-text">...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
