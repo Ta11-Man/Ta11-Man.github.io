@@ -23,3 +23,5 @@ python -m http.server
 ```
 
 This is because (at least for Windows) there are protections that prevent html files from querying the local file system (JSON in this case). So we run it as a light-weight server.
+
+I make this nice, as I tend to include a make file in my projects for even the smallest reasons; run make to serve :)
