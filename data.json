@@ -4516,7 +4516,7 @@
         },
         {
           "date": "2026-01-29",
-          "count": 0
+          "count": 1
         },
         {
           "date": "2026-01-30",
@@ -5867,12 +5867,12 @@
   ],
   "publicRepos": [
     {
-      "extension": "cs489-keyboard",
-      "language": "C++"
-    },
-    {
       "extension": "CS307",
       "language": "Unknown"
+    },
+    {
+      "extension": "cs489-keyboard",
+      "language": "C++"
     },
     {
       "extension": "Ta11-Man.github.io",
