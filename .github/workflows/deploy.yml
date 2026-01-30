@@ -26,7 +26,15 @@ jobs:
       - name: Generate Data
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-        run: python generate_data.py # This creates data.json in the current folder
+        run: |
+          if [ $(( $RANDOM % 100 )) -gt 15 ]; then
+            echo "Skipping update today to keep the activity graph natural."
+            exit 0
+          fi
+          SLEEP_TIME=$(( $RANDOM % 40000 ))
+          echo "Sleeping for $SLEEP_TIME seconds before starting..."
+          sleep $SLEEP_TIME
+          python generate_data.py # This creates data.json in the current folder
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
