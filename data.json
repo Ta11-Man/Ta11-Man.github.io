@@ -4516,11 +4516,11 @@
         },
         {
           "date": "2026-01-29",
-          "count": 1
+          "count": 2
         },
         {
           "date": "2026-01-30",
-          "count": 0
+          "count": 1
         },
         {
           "date": "2026-01-31",
@@ -5867,16 +5867,16 @@
   ],
   "publicRepos": [
     {
+      "extension": "Ta11-Man.github.io",
+      "language": "HTML"
+    },
+    {
       "extension": "CS307",
       "language": "Unknown"
     },
     {
       "extension": "cs489-keyboard",
       "language": "C++"
-    },
-    {
-      "extension": "Ta11-Man.github.io",
-      "language": "HTML"
     },
     {
       "extension": "Shreyav1231",
