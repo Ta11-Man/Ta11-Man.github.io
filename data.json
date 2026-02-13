@@ -1566,7 +1566,7 @@
         },
         {
           "date": "2024-01-25",
-          "count": 0
+          "count": 2
         },
         {
           "date": "2024-01-26",
@@ -1902,7 +1902,7 @@
         },
         {
           "date": "2024-04-18",
-          "count": 0
+          "count": 1
         },
         {
           "date": "2024-04-19",
@@ -4267,7 +4267,7 @@
         },
         {
           "date": "2025-11-29",
-          "count": 15
+          "count": 16
         },
         {
           "date": "2025-11-30",
@@ -4412,123 +4412,123 @@
         },
         {
           "date": "2026-01-03",
-          "count": 7
+          "count": 0
         },
         {
           "date": "2026-01-04",
-          "count": 5
+          "count": 0
         },
         {
           "date": "2026-01-05",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-06",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-07",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-08",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-09",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-10",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-11",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-12",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-13",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-14",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-15",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-16",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-17",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-18",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-19",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-20",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-21",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-22",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-23",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-24",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-25",
-          "count": 2
+          "count": 0
         },
         {
           "date": "2026-01-26",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-27",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-28",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-01-29",
-          "count": 2
+          "count": 0
         },
         {
           "date": "2026-01-30",
-          "count": 2
+          "count": 0
         },
         {
           "date": "2026-01-31",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-02-01",
-          "count": 7
+          "count": 0
         },
         {
           "date": "2026-02-02",
@@ -4540,11 +4540,11 @@
         },
         {
           "date": "2026-02-04",
-          "count": 2
+          "count": 0
         },
         {
           "date": "2026-02-05",
-          "count": 1
+          "count": 0
         },
         {
           "date": "2026-02-06",
@@ -4552,11 +4552,11 @@
         },
         {
           "date": "2026-02-07",
-          "count": 2
+          "count": 0
         },
         {
           "date": "2026-02-08",
-          "count": 4
+          "count": 0
         },
         {
           "date": "2026-02-09",
@@ -5863,60 +5863,6 @@
           "count": 0
         }
       ]
-    }
-  ],
-  "publicRepos": [
-    {
-      "extension": "yatta111",
-      "language": "TypeScript"
-    },
-    {
-      "extension": "cf_ai_homelab_helper",
-      "language": "JavaScript"
-    },
-    {
-      "extension": "Ta11-Man.github.io",
-      "language": "HTML"
-    },
-    {
-      "extension": "cs489-keyboard",
-      "language": "C++"
-    },
-    {
-      "extension": "Shreyav1231",
-      "language": "Unknown"
-    },
-    {
-      "extension": "High-Standard",
-      "language": "Unknown"
-    },
-    {
-      "extension": "EBEC-python",
-      "language": "Python"
-    },
-    {
-      "extension": "solar-bracket",
-      "language": "Unknown"
-    },
-    {
-      "extension": "minecraft-server",
-      "language": "Python"
-    },
-    {
-      "extension": "Ta11-Man",
-      "language": "Unknown"
-    },
-    {
-      "extension": "scarecrow-bot",
-      "language": "Python"
-    },
-    {
-      "extension": "ecPycharm",
-      "language": "Python"
-    },
-    {
-      "extension": "homework-0-Ta11-Man",
-      "language": "Unknown"
     }
   ]
 }
