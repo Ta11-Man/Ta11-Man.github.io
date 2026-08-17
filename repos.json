@@ -3,7 +3,37 @@
     "name": "Minecraft Server Management",
     "link": "https://github.com/Ta11-Man/minecraft-server",
     "languages": ["Python", "YAML"],
-    "priority": 1
+    "priority": 3
+  },
+  {
+    "name": "Professional Kit",
+    "link": "https://github.com/Ta11-Man/profesh-kit",
+    "languages": ["Python", "YAML", "LatTex"],
+    "priority": 6
+  },
+  {
+    "name": "Grits",
+    "link": "https://github.com/Ta11-Man/grts",
+    "languages": ["Web Extension", "SQL", "Python"],
+    "priority": 6
+  },
+  {
+    "name": "General Config files",
+    "link": "https://github.com/Ta11-Man/master-config",
+    "languages": ["shell", "TOML"],
+    "priority": 5
+  },
+  {
+    "name": "Catapult Hackathon 2026",
+    "link": "https://github.com/Ta11-Man/Catapult2026",
+    "languages": ["Javascript", "WorldID"],
+    "priority": 2
+  },
+  {
+    "name": "Cloudflare AI Helper",
+    "link": "https://github.com/Ta11-Man/cf_ai_homelab_helper",
+    "languages": ["Javascript"],
+    "priority": 2
   },
   {
     "name": "Github Website",
