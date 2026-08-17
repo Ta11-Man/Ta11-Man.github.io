@@ -77,8 +77,8 @@ async function loadProjects() {
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const projects = await response.json();
 
-    // Sort by priority (ascending - lower numbers first)
-    projects.sort((a, b) => a.priority - b.priority);
+    // Sort by priority (descending - higher numbers first)
+    projects.sort((a, b) => b.priority - a.priority);
 
     const sidebar = document.getElementById("projectSidebar");
     sidebar.innerHTML = ""; // Clear existing content
@@ -162,7 +162,7 @@ async function loadGitHubActivity() {
       JSON.stringify({
         data: commitData,
         timestamp: Date.now(),
-      })
+      }),
     );
 
     renderAllYears(commitData);
