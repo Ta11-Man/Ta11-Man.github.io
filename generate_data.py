@@ -15,20 +15,86 @@ OUTPUT_FILE = "data.json"
 YEARS_TO_FETCH = [ 2023, 2024, 2025, 2026] # Adjust years as needed
 # ---------------------------------------------------------
 
-HEADERS = {"Authorization": f"Bearer {TOKEN}"}
+if not TOKEN:
+    raise ValueError(
+        "GITHUB_TOKEN is missing or empty! Check your .env file."
+    )
 
-def run_query(query, variables):
-    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS)
-    if request.status_code == 200:
-        return request.json()
+HEADERS = {
+    "Authorization": f"Bearer {TOKEN}",
+    "User-Agent": f"{USERNAME}-Stats-Generator",
+    "Accept": "application/vnd.github+json",
+}
+
+def run_query(query, variables=None):
+    payload = {"query": query}
+    if variables:
+        payload["variables"] = variables
+
+    response = requests.post(
+        "https://api.github.com/graphql",
+        json=payload,
+        headers=HEADERS,
+        timeout=20,
+    )
+
+    if response.status_code == 200:
+        data = response.json()
+        if "errors" in data:
+            raise Exception(f"GraphQL Errors: {data['errors']}")
+        return data
     else:
-        raise Exception(f"Query failed to run by returning code of {request.status_code}. {query}")
+        raise Exception(
+            f"Query failed with HTTP {response.status_code}.\n"
+            f"Response Body: {response.text}\n"
+            f"Query:\n{query}"
+        )
+
+# def get_contributions_for_year(year):
+#     # GraphQL query to get the daily contribution count for a specific year
+#     query = """
+#     query($userName: String!, $from: DateTime!, $to: DateTime!) {
+#       user(login: $userName) {
+#         contributionsCollection(from: $from, to: $to) {
+#           contributionCalendar {
+#             weeks {
+#               contributionDays {
+#                 contributionCount
+#                 date
+#               }
+#             }
+#           }
+#         }
+#       }
+#     }
+#     """
+    
+#     # Define date range for the requested year
+#     variables = {
+#         "userName": USERNAME,
+#         "from": f"{year}-01-01T00:00:00Z",
+#         "to": f"{year}-12-31T23:59:59Z"
+#     }
+    
+#     result = run_query(query, variables)
+#     calendar = result['data']['user']['contributionsCollection']['contributionCalendar']
+    
+#     # Flatten the weeks -> days structure
+#     daily_commits = []
+#     for week in calendar['weeks']:
+#         for day in week['contributionDays']:
+#             daily_commits.append({
+#                 "date": day['date'],
+#                 "count": day['contributionCount']
+#             })
+            
+#     return daily_commits
 
 def get_contributions_for_year(year):
-    # GraphQL query to get the daily contribution count for a specific year
+    # GraphQL query using 'viewer' is significantly faster and avoids 503 backend routing drops
     query = """
-    query($userName: String!, $from: DateTime!, $to: DateTime!) {
-      user(login: $userName) {
+    query($from: DateTime!, $to: DateTime!) {
+      viewer {
         contributionsCollection(from: $from, to: $to) {
           contributionCalendar {
             weeks {
@@ -43,17 +109,14 @@ def get_contributions_for_year(year):
     }
     """
     
-    # Define date range for the requested year
     variables = {
-        "userName": USERNAME,
         "from": f"{year}-01-01T00:00:00Z",
         "to": f"{year}-12-31T23:59:59Z"
     }
     
     result = run_query(query, variables)
-    calendar = result['data']['user']['contributionsCollection']['contributionCalendar']
+    calendar = result['data']['viewer']['contributionsCollection']['contributionCalendar']
     
-    # Flatten the weeks -> days structure
     daily_commits = []
     for week in calendar['weeks']:
         for day in week['contributionDays']:
